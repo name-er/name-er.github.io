@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Muhammad Nameer · Senior Software Engineer</title>
-<meta name="description" content="Senior software engineer in Hyderabad. I build LLM agents, MCP servers, and the evals that measure them, including a code-review agent measured against its own multi-agent pipeline.">
+<meta name="description" content="Senior software engineer in Hyderabad. I build LLM agents, MCP servers and the evals that measure them.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Muhammad Nameer · Senior Software Engineer">
-<meta property="og:description" content="I build LLM agents, MCP servers, and the evals that measure them. A single-pass reviewer matched my multi-agent pipeline at about a fifth of the cost, on a partial holdout of 53 PRs.">
+<meta property="og:description" content="Senior software engineer in Hyderabad. I build LLM agents, MCP servers and the evals that measure them.">
 <meta name="color-scheme" content="dark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0b0c'/%3E%3Crect x='3' y='4' width='2' height='8' fill='%23f5b544'/%3E%3Crect x='7' y='4' width='6' height='2' fill='%23ececea'/%3E%3Crect x='7' y='10' width='4' height='2' fill='%238f8f94'/%3E%3C/svg%3E">
 <script>document.documentElement.className = "js"</script>
@@ -102,13 +102,11 @@ p { margin: 0; }
   margin: 22px 0 28px; color: var(--text);
 }
 .lede { font-size: clamp(19px, 1.55vw, 22px); line-height: 1.42; color: var(--body); max-width: 25ch; letter-spacing: -0.01em; }
-.pinned { margin: 40px 0 0; padding: 14px 0 15px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font: 13.5px/1.75 var(--mono); color: var(--muted); }
-.pinned .label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 11px; }
-.pinned .label span:last-child { color: var(--faint); letter-spacing: 0.04em; }
-.pinned .res { color: var(--muted); }
-.pinned .res b { color: var(--text); font-weight: 500; }
-.pinned .res .vs { color: var(--faint); padding: 0 0.4em; }
-.pinned .fine { color: var(--muted); font-size: 12px; }
+.lede-2 { margin-top: 14px; max-width: 46ch; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.pinned { margin: 34px 0 0; padding: 14px 0 15px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font: 13.5px/1.75 var(--mono); color: var(--muted); }
+.pinned .label { margin-bottom: 6px; font-size: 11px; }
+.pinned .main { max-width: 40ch; font: 500 17px/1.45 var(--sans); letter-spacing: -0.01em; color: var(--text); }
+.pinned .fine { margin-top: 8px; color: var(--muted); font-size: 12px; }
 .jump { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; margin-top: 30px; font: 13px/1.4 var(--mono); }
 .jump a { color: var(--body); }
 .jump a:hover { color: var(--text); }
@@ -390,6 +388,8 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .ledger .yr { width: 190px; } /* shared by both ledgers so their columns line up */
 .ledger td.yr { font: 13px/1.6 var(--mono); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .ledger .thing { width: 42%; }
+.ledger.work .thing { width: auto; }
+.ledger.work .thing span { max-width: 78ch; font-size: 14.5px; line-height: 1.55; }
 .ledger .thing b { display: block; font-weight: 500; color: var(--text); }
 .ledger .thing span { display: block; margin-top: 3px; font-size: 13.5px; color: var(--muted); }
 .ledger .proves { color: var(--body); padding-right: 0; }
@@ -486,8 +486,6 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 @media (max-width: 640px) {
   .intro h1 { font-size: clamp(48px, 14vw, 60px); margin: 18px 0 20px; }
   .pinned { font-size: 12px; }
-  .pinned .res .vs { display: block; height: 0; overflow: hidden; }
-  .pinned .res span { display: block; }
   .kbd-btn { margin-left: 0; }
   .tabs { font-size: 12px; }
   .tab { padding: 0 12px; }
@@ -533,11 +531,12 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
       <p class="label">Senior Software Engineer · Hyderabad</p>
       <h1 id="name" tabindex="-1">Muhammad<br>Nameer</h1>
       <p class="lede">I build LLM agents, MCP servers, and the evals that measure them.</p>
+      <p class="lede-2">I've spent four years at Foundation AI working on an AI document-processing platform for US law firms and insurers: the React front end first, and since 2026 the whole stack.</p>
 
       <div class="pinned" role="group" aria-labelledby="pinned-l">
-        <p class="label" id="pinned-l"><span>Result · code-review eval</span><span>pinned</span></p>
-        <p class="res"><span>single pass <b>82%</b> recall · <b>$25</b></span><span class="vs">vs</span><span>multi-agent <b>76%</b> · <b>$124</b></span></p>
-        <p class="fine">partial holdout of 53 PRs · agent-labelled bugs</p>
+        <p class="label" id="pinned-l">One result</p>
+        <p class="main">A single AI reviewer matched my multi-agent pipeline on bugs found, at about a fifth of the cost.</p>
+        <p class="fine">82% vs 76% recall · $25 vs $124 · first 53 of 82 test PRs</p>
       </div>
 
       <nav class="jump" aria-label="On this page">
@@ -642,23 +641,23 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
               <li><span class="i">17</span><span class="w val">validator</span><span class="m">L6: runs the smallest test</span></li>
               <li class="kept"><span class="i">18</span><span class="w val">validator</span><span class="m">L6 kept: sleeps after try 4, 8 s wasted</span></li>
               <li><span class="i">19</span><span class="w">result</span><span class="m">2 kept, 2 disproved, $2.23</span></li>
-              <li><span class="i">20</span><span class="w">eval</span><span class="m">one PR shows how; the holdout measures it</span></li>
+              <li><span class="i">20</span><span class="w">eval</span><span class="m">This PR shows how it works; the test set measures it.</span></li>
             </ol>
           </div>
         </div>
 
         <div class="pane pane-eval" id="pane-eval" role="tabpanel" aria-labelledby="tab-eval">
           <div class="ev-head">
-            <p class="label">Recall on agent-labelled bugs · 95% interval</p>
+            <p class="label">Recall on known bugs · 95% range</p>
             <div class="seg needs-js" role="group" aria-label="Eval run">
-              <button type="button" data-run="h1" aria-pressed="false">Holdout 1</button>
-              <button type="button" data-run="h2" aria-pressed="true">Holdout 2 · partial</button>
+              <button type="button" data-run="h1" aria-pressed="false">Run 1</button>
+              <button type="button" data-run="h2" aria-pressed="true">Run 2 · unfinished</button>
             </div>
           </div>
           <p class="ev-claim" id="ev-claim">A single pass <b>matched</b> the multi-agent pipeline at about a fifth of the cost.</p>
           <svg class="chart" id="chart" viewBox="0 0 600 252" role="img" aria-labelledby="chart-t chart-d">
-            <title id="chart-t">Recall with 95% intervals, Holdout 2</title>
-            <desc id="chart-d">Single pass 82% recall, interval 70 to 90%. Pipeline 76% recall, interval 64 to 86%, computed from the counts.</desc>
+            <title id="chart-t">Recall with 95% ranges, Run 2 · unfinished</title>
+            <desc id="chart-d">Single pass 82% recall, range 70 to 90%. Pipeline 76% recall, range 64 to 86%, calculated from the counts.</desc>
             <g class="axis" id="axis">
               <line class="grid base" x1="100" x2="100" y1="24" y2="140"/><text class="tick-l" x="100" y="14" text-anchor="middle">40%</text>
               <line class="grid" x1="180.7" x2="180.7" y1="24" y2="140"/><text class="tick-l" x="180.7" y="14" text-anchor="middle">50</text>
@@ -693,15 +692,15 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
             </g>
           </svg>
           <table class="ro">
-            <thead><tr><th scope="col">arm</th><th scope="col">bugs found</th><th scope="col">recall</th><th scope="col">95% interval</th><th scope="col">cost</th></tr></thead>
+            <thead><tr><th scope="col">arm</th><th scope="col">bugs found</th><th scope="col">recall</th><th scope="col">95% range</th><th scope="col">cost</th></tr></thead>
             <tbody id="ro-body">
               <tr><th scope="row"><span class="sw" aria-hidden="true"></span>single pass</th><td>46 of 56</td><td>82%</td><td>70–90</td><td>$25.13</td></tr>
-              <tr><th scope="row"><span class="sw" aria-hidden="true"></span>pipeline</th><td>42 of 55</td><td>76%</td><td>64–86<span class="cmp">computed from the counts</span></td><td>$124.04</td></tr>
+              <tr><th scope="row"><span class="sw" aria-hidden="true"></span>pipeline</th><td>42 of 55</td><td>76%</td><td>64–86</td><td>$124.04</td></tr>
             </tbody>
           </table>
-          <p class="ev-note" id="ev-note">Opus 5.5 · 12 Nov 2026 · partial: both arms finished 53 of 82 holdout PRs.</p>
+          <p class="ev-note" id="ev-note">Opus 5.5 · 12 Nov 2026 · both designs scored on the first 53 of 82 test PRs.</p>
           <div class="ev-foot">
-            <p class="ev-key" aria-hidden="true"><span><i class="k-dot"></i>recall</span><span><i class="k-wh"></i>95% interval</span><span><i class="k-dash"></i>interval computed from the counts</span></p>
+            <p class="ev-key" aria-hidden="true"><span><i class="k-dot"></i>recall</span><span><i class="k-wh"></i>95% range</span><span><i class="k-dash"></i>dashed: range calculated from the counts</span></p>
             <span class="ev-links"><a class="textbtn" href="#case-study">How it was measured</a><button type="button" class="textbtn needs-js" id="again">Replay the review</button></span>
           </div>
         </div>
@@ -731,117 +730,91 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
     <div class="side-label"><p class="label">Case study</p><p class="label">Nov 2026</p></div>
     <div class="body"><article class="cs">
       <h2 id="cs-h" tabindex="-1">Does a multi-agent code reviewer pay for itself?</h2>
-      <p class="dek">I built a code-review agent from sandboxed reviewers and adversarial validators, then built an eval to see whether all those agents earn their cost. On the latest, partial run, a single pass matched them at about a fifth of the price.</p>
+      <p class="dek">I built a code-review agent out of several AI reviewers plus validators that try to knock down what they find. Then I built an eval to check whether all those agents were worth it. So far, a single reviewer has done just as well for about a fifth of the cost.</p>
 
       <div class="cs-part">
         <h3 id="cs-question">The question</h3>
-        <p class="prose">Multi-agent review is an easy design to like. Several reviewers, each with a narrow brief, then a second set of agents whose only job is to knock down what the first set found. It reads like rigour. It also costs several times as much per pull request. I wanted to know whether the extra agents find bugs that a single pass misses, or mostly add cost.</p>
+        <p class="prose">Splitting code review across several specialised agents, then adding more agents to double-check their findings, sounds thorough. It also costs several times more per pull request. I wanted to know whether the extra agents catch bugs that a single pass misses.</p>
       </div>
 
       <div class="cs-part">
         <h3 id="cs-built">What I built</h3>
-        <aside class="side" id="sn-1" aria-label="Note 1"><span class="label">1 · The sandbox</span>A test runs against the sandbox itself and checks that network calls, writes outside the pack and reads of credential folders are all blocked.</aside>
-        <p class="prose">The agent pins a pull request's head and base into a pack, without touching any checkout, and sizes the review by diff size and risk. A standard run starts three <span class="n n-rev">reviewer</span> agents, each reading the diff through one lens: behaviour, boundaries, and a line-by-line proofread. A deep run adds a regression lens. The reviewers run headless inside an OS sandbox with no network and no access to credentials, and they can write only to the pack.<a class="snref" href="#sn-1" aria-label="Note 1">1</a> Each finding has to name a trigger, the wrong result and the path to it, file and line. Reviewers also list each ticket requirement and whether the diff delivers it.</p>
-        <p class="prose">A separate <span class="n n-val">validator</span> then tries to disprove every finding. It looks for the guard or caller that makes the code safe, checks that the trigger is reachable, and runs the smallest test where the repository's tests can run. Each candidate ends as confirmed, plausible, rejected or unvalidated; in the replay above, confirmed findings are <span class="n n-kept">kept</span> and rejected ones <span class="n n-dis">disproved</span>. A dollar cap stops new validators when a run gets expensive. Nothing is posted to GitHub: I read the result and decide what to say.</p>
-        <p class="prose">I designed, specified and reviewed this tooling; it was implemented with AI coding agents (Claude Code, Codex and Cursor).</p>
+        <aside class="side" id="sn-1" aria-label="Note 1"><span class="label">1</span>A test runs against the sandbox itself and checks that network calls, writes outside the working folder and reads of credential folders are all blocked.</aside>
+        <p class="prose">I built it for my own code reviews. Each review runs headless in an OS sandbox: no network, no credentials, and it can write only to its own working folder.<a class="snref" href="#sn-1" aria-label="Note 1">1</a> Three <span class="n n-rev">reviewers</span> read the diff, each looking for a different kind of problem, and every finding has to name what triggers it, what goes wrong and the exact line. A separate <span class="n n-val">validator</span> then tries to prove each finding wrong: it looks for a check elsewhere that makes the code safe, confirms the bad path can actually happen, and runs the smallest test it can. Nothing is posted to GitHub; I read what it found and decide what to say.</p>
+        <p class="prose">I designed it, specified it and reviewed the changes; it was implemented with AI coding agents (Claude Code, Codex and Cursor).</p>
       </div>
 
       <div class="cs-part">
         <h3 id="cs-measured">How I measured it</h3>
-        <aside class="side" id="sn-2" aria-label="Note 2"><span class="label">2 · Triage</span>An LLM first triaged 579 review threads, for bugs reviewers caught, and 665 fix PRs, for bugs that got past review.</aside>
-        <p class="prose">The test set had to come from real bugs in real code: the ones reviewers caught and the ones that got past them. I mined 2,107 merged pull requests from 8 repositories, January 2025 to February 2026, and added them to an earlier, smaller set.<a class="snref" href="#sn-2" aria-label="Note 2">2</a> A verifier agent then had to show each escaped bug absent at the base of the PR that introduced it and present at its head; 76 of 130 traced fixes failed that check and were dropped. After that, the set had 230 cases, 225 known bugs and 68 clean PRs.</p>
-        <p class="prose">The cases are split into a dev set for iteration and a holdout, with a rule against tuning on the holdout. A judge model decides whether a review found each known bug, so the score is recall. Every result carries a 95% interval, and a spend ledger with budget caps records every run. Each holdout run puts two arms on the same PRs: a single pass, and the full multi-agent pipeline.</p>
+        <p class="prose">The test set had to be real bugs in real code. I took about 2,100 merged pull requests from the product I work on and pulled out two kinds of bug: ones reviewers caught, and ones that slipped through and were fixed later. For each slipped bug, an agent had to show it really existed in the pull request that introduced it; more than half failed that check and were thrown out. Added to the cases I already had, that gave 230 test cases: 162 pull requests with 225 known bugs between them, and 68 with no known bug.</p>
+        <p class="prose">I split the cases into a set I tune against and a held-out set I never tune against. A judge model decides whether each review found each known bug, and every score comes with a 95% range. Each run puts both designs on the same pull requests: one reviewer, or the full multi-agent pipeline.</p>
       </div>
 
       <div class="cs-part">
         <h3 id="cs-found">What I found</h3>
-        <aside class="side" id="sn-3" aria-label="Note 3"><span class="label">3 · One computed range</span>The pipeline's range on the second run, 64 to 86%, is computed here from 42 of 55 with a Wilson score interval, because the run's summary does not print it. The same formula reproduces the other three ranges.</aside>
-        <p class="prose">Neither run shows a real difference in recall. On the smaller run the pipeline found two more bugs, 13 of 15 against 11 of 15. On the larger, partial run it went the other way, 42 of 55 against 46 of 56.<a class="snref" href="#sn-3" aria-label="Note 3">3</a> In both, the intervals overlap widely. The cost difference is real: the pipeline cost about 4.7 times as much on the first run and 4.9 times as much on the second.</p>
+        <p class="prose">Neither run shows a real difference in bugs found. On the first, smaller run the pipeline found two more (13 of 15 against 11 of 15); on the second it found fewer (42 of 55 against 46 of 56). Either way the ranges overlap. The cost gap is real: the pipeline cost about 4.7 times as much on the first run and 4.9 times as much on the second.</p>
         <figure class="runs" aria-labelledby="runs-cap">
           <div class="runs-plot" aria-hidden="true">
             <div class="rrow axis"><span></span><span class="tr"><i style="--p:40">40%</i><i style="--p:50">50</i><i style="--p:60">60</i><i style="--p:70">70</i><i style="--p:80">80</i><i style="--p:90">90</i><i style="--p:100">100%</i></span><span></span></div>
-            <p class="rg">Holdout 1 · Sonnet · 20 PRs</p>
+            <p class="rg">Run 1 · Sonnet · 7 Nov 2026 · 20 PRs</p>
             <div class="rrow s"><span class="rl">single pass</span><span class="tr"><i class="ci" style="--lo:48;--hi:89"></i><i class="pt" style="--p:73.3"></i></span><span class="rv">73%</span></div>
             <div class="rrow p"><span class="rl">pipeline</span><span class="tr"><i class="ci" style="--lo:62;--hi:96"></i><i class="pt" style="--p:86.7"></i></span><span class="rv">87%</span></div>
-            <p class="rg">Holdout 2 · partial · Opus 5.5 · 53 of 82 PRs</p>
+            <p class="rg">Run 2 · Opus 5.5 · 12 Nov 2026 · first 53 of 82 PRs</p>
             <div class="rrow s"><span class="rl">single pass</span><span class="tr"><i class="ci" style="--lo:70;--hi:90"></i><i class="pt" style="--p:82.1"></i></span><span class="rv">82%</span></div>
             <div class="rrow p"><span class="rl">pipeline</span><span class="tr"><i class="ci computed" style="--lo:64;--hi:86"></i><i class="pt" style="--p:76.4"></i></span><span class="rv">76%</span></div>
           </div>
           <table class="ro">
-            <thead><tr><th scope="col">arm</th><th scope="col">bugs found</th><th scope="col">recall</th><th scope="col">95% interval</th><th scope="col">cost</th></tr></thead>
+            <thead><tr><th scope="col">arm</th><th scope="col">bugs found</th><th scope="col">recall</th><th scope="col">95% range</th><th scope="col">cost</th></tr></thead>
             <tbody>
-              <tr class="grp"><th scope="rowgroup" colspan="5">Holdout 1 · Sonnet · 7 Nov 2026 · 20 PRs</th></tr>
+              <tr class="grp"><th scope="rowgroup" colspan="5">Run 1 · Sonnet · 7 Nov 2026 · 20 PRs</th></tr>
               <tr><th scope="row">single pass</th><td>11 of 15</td><td>73%</td><td>48–89</td><td>$3.13</td></tr>
               <tr><th scope="row">pipeline</th><td>13 of 15</td><td>87%</td><td>62–96</td><td>$14.58</td></tr>
             </tbody>
             <tbody>
-              <tr class="grp"><th scope="rowgroup" colspan="5">Holdout 2 · partial · Opus 5.5 · 12 Nov 2026 · 53 of 82 PRs</th></tr>
+              <tr class="grp"><th scope="rowgroup" colspan="5">Run 2 · Opus 5.5 · 12 Nov 2026 · first 53 of 82 PRs</th></tr>
               <tr><th scope="row">single pass</th><td>46 of 56</td><td>82%</td><td>70–90</td><td>$25.13</td></tr>
-              <tr><th scope="row">pipeline</th><td>42 of 55</td><td>76%</td><td>64–86<span class="cmp">computed from the counts</span></td><td>$124.04</td></tr>
+              <tr><th scope="row">pipeline</th><td>42 of 55</td><td>76%</td><td>64–86</td><td>$124.04</td></tr>
             </tbody>
           </table>
-          <figcaption id="runs-cap">Recall on agent-labelled bugs, with 95% intervals; the dashed range is computed from the counts. The same two runs switch in the <a href="#replay">replay at the top</a>.</figcaption>
+          <figcaption id="runs-cap">Recall on known bugs, with 95% ranges. The pipeline's range on run 2 is calculated from the counts because the eval's summary doesn't record it.</figcaption>
         </figure>
-        <p class="prose">So on this evidence a single pass matched the pipeline at about a fifth of the cost. Matched is the honest word: at these sample sizes the two designs cannot be told apart on recall, and only one of them costs about five times as much.</p>
       </div>
 
       <div class="cs-part">
-        <h3 id="cs-limits">Limits</h3>
-        <p class="prose">These numbers are worth what their limits allow.</p>
-        <ul class="list">
-          <li>The second run is partial: both arms finished 53 of 82 holdout PRs.</li>
-          <li>The bug labels were made by agents and not checked by a person; 20 are queued for a hand check.</li>
-          <li>One judge model scores every match, and it comes from the same model family as the reviewers.</li>
-          <li>The score is recall only. False alarms are not measured, and fewer false alarms is exactly what validators might buy.</li>
-          <li>It is my own tool, not a team rollout.</li>
-        </ul>
+        <h3 id="cs-limits">What this doesn't show</h3>
+        <p class="prose">The second run isn't finished: both designs have been scored on 53 of its 82 pull requests. The known bugs were labelled by agents, not checked by a person, and one judge model did all the scoring. I also only measured whether bugs were found, not how many false alarms each design raised. That last one is where the extra agents could still earn their cost.</p>
       </div>
 
-      <div class="cs-part">
-        <h3 id="cs-next">What's next</h3>
-        <ol class="list">
-          <li>Finish the remaining 29 holdout PRs.</li>
-          <li>Hand-check the agent-made labels.</li>
-          <li>Measure false alarms on the 68 clean PRs.</li>
-          <li>Try a judge from a different model family.</li>
-        </ol>
-      </div>
-
-      <p class="takeaway">Measure before adding agents. <span>An expensive design has to earn its cost. So far the extra reviewers and validators have not earned theirs on recall; whether they earn it on false alarms is the next thing I measure.</span></p>
+      <p class="takeaway">So far the simpler design wins on cost and ties on bugs found. <span>I'd want the false-alarm numbers before calling it settled.</span></p>
     </article></div>
   </section>
 
   <section class="section" id="work" aria-labelledby="work-h">
     <div class="side-label"><p class="label">Work</p><p class="label">2022 to now</p></div>
     <div class="body">
-      <h2 class="h2" id="work-h" tabindex="-1">What I have built, and what each one shows</h2>
-      <table class="ledger" role="table">
-        <thead role="rowgroup"><tr role="row"><th scope="col" class="label yr" role="columnheader">Year</th><th scope="col" class="label" role="columnheader">Thing</th><th scope="col" class="label" role="columnheader">What it proves</th></tr></thead>
+      <h2 class="h2" id="work-h" tabindex="-1">What I've built</h2>
+      <table class="ledger work" role="table">
+        <thead role="rowgroup"><tr role="row"><th scope="col" class="label yr" role="columnheader">Year</th><th scope="col" class="label" role="columnheader">Project</th></tr></thead>
         <tbody role="rowgroup">
           <tr role="row">
             <td class="yr" role="cell">2026</td>
-            <th scope="row" class="thing" role="rowheader"><b>Code-review agent and its eval harness</b><span>Sandboxed reviewers, validators that try to disprove each finding, and an eval set of 230 cases built from real merged PRs. <a href="#case-study">Case study</a></span></th>
-            <td class="proves" role="cell">I measure an agent before I trust it: on a partial holdout, a single pass matched the multi-agent pipeline at about a fifth of the cost.</td>
+            <th scope="row" class="thing" role="rowheader"><b>Code-review agent and eval</b><span>Several AI reviewers plus validators that try to prove each finding wrong, scored against 230 real cases from the product's history. <a href="#case-study">Read the case study</a></span></th>
           </tr>
           <tr role="row">
             <td class="yr" role="cell">2026</td>
-            <th scope="row" class="thing" role="rowheader"><b>Case-investigation MCP server</b><span>18 tools that join Postgres records, OpenSearch logs, S3 object metadata and Redis recovery state into one evidence timeline; 342 tests.</span></th>
-            <td class="proves" role="cell">An agent can reach production data safely: staging by default, read-only production access that fails closed, PII redaction, bounded queries that declare what they cut.</td>
+            <th scope="row" class="thing" role="rowheader"><b>Case-investigation MCP server</b><span>Lets an AI agent answer 'why did this case or document end up here?' by pulling database records, logs and file-storage metadata into one timeline. Safe by default: staging first, read-only production access that fails closed, personal data redacted.</span></th>
           </tr>
           <tr role="row">
             <td class="yr" role="cell">2026</td>
-            <th scope="row" class="thing" role="rowheader"><b>Full-stack, beyond the UI</b><span>FastAPI, Flask, Celery, Lambda, Terraform, Helm; second-largest committer on the new FastAPI backend (103 of 487 commits).</span></th>
-            <td class="proves" role="cell">I work across the API, the pipeline and the infrastructure that runs them.</td>
+            <th scope="row" class="thing" role="rowheader"><b>Operations dashboard, full stack</b><span>Built the API endpoints and React front end for a document-operations dashboard. I work across the Python services (FastAPI, Flask, Celery), AWS Lambda, Terraform and Helm.</span></th>
           </tr>
           <tr role="row">
             <td class="yr" role="cell">2025</td>
-            <th scope="row" class="thing" role="rowheader"><b>React 16 to 19 upgrade</b><span>The product UI, with react-redux 5 to 9, as sole author.</span></th>
-            <td class="proves" role="cell">I can take a production UI across three major versions on my own.</td>
+            <th scope="row" class="thing" role="rowheader"><b>React 16 to 19 upgrade</b><span>Took the product's UI through three major React versions, and react-redux 5 to 9, on my own.</span></th>
           </tr>
           <tr role="row">
-            <td class="yr" role="cell">since 2022</td>
-            <th scope="row" class="thing" role="rowheader"><b>React product UI</b><span>1,539 of 3,572 main-branch commits since Aug 2022 (43%), the largest share.</span></th>
-            <td class="proves" role="cell">I stay with a product: four years as the largest contributor to its React UI.</td>
+            <td class="yr" role="cell">2022 to now</td>
+            <th scope="row" class="thing" role="rowheader"><b>Document workspace</b><span>Largest contributor to the product's React UI for four years, including the virtualized drag-and-drop workspace for viewing documents and moving pages.</span></th>
           </tr>
         </tbody>
       </table>
@@ -882,14 +855,14 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
   </section>
 
   <section class="section" id="beliefs" aria-labelledby="beliefs-h">
-    <div class="side-label"><p class="label">Beliefs</p><p class="label">from what I built</p></div>
+    <div class="side-label"><p class="label">Beliefs</p></div>
     <div class="body">
       <h2 class="h2" id="beliefs-h" tabindex="-1">What I believe about agents</h2>
       <ol class="beliefs">
-        <li><h3>Measure before adding agents.</h3><p>On the latest, partial run, about five times the spend bought no extra recall. More agents is a hypothesis with a price, so it gets tested like any other.</p></li>
-        <li><h3>Never tune on the holdout.</h3><p>The eval keeps a dev split for iteration and a held-out split with a rule against tuning on it, and every number carries a 95% interval. On 15 bugs, a two-bug lead sits inside the noise.</p></li>
-        <li><h3>Ship the caveats with the number.</h3><p>My multi-agent design cost about five times as much as a single pass and found no more bugs on the latest, partial run, and the case study says so. It also says what the run cannot show: the bug labels were made by agents, one judge model scored them, and false alarms were not measured.</p></li>
-        <li><h3>Guardrails belong outside the model.</h3><p>The review agent runs in an OS sandbox with no network and no credentials, and a test proves the sandbox holds. The MCP server reads production only when asked, read-only, and fails closed. An instruction is a request; a sandbox is a guarantee.</p></li>
+        <li><h3>Measure before adding agents.</h3><p>More agents cost more on every run. Check that they find more before you keep them.</p></li>
+        <li><h3>Never tune on the holdout.</h3><p>Once you tune against your test set, its scores stop telling you anything about new code.</p></li>
+        <li><h3>Ship the caveats with the number.</h3><p>Put what a result doesn't show right next to it, not in a footnote.</p></li>
+        <li><h3>Guardrails belong outside the model.</h3><p>A prompt that says 'don't' is a request. A sandbox with no network or credentials is a guarantee.</p></li>
       </ol>
     </div>
   </section>
@@ -903,12 +876,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 </main>
 
 <footer class="colophon">
-  <p>
-    <span>rev <b>r4.2d9f61a</b></span>
-    <span>eval run <b>Nov 2026</b></span>
-    <span>Hyderabad <b><time id="ist" datetime="">IST, UTC+5:30</time></b><span class="needs-js"> IST</span></span>
-    <span>set in Geist and Geist Mono</span>
-  </p>
+  <p><span>© 2026 Muhammad Nameer · Hyderabad<span class="needs-js"> · <b><time id="ist" datetime=""></time></b> IST</span></span></p>
 </footer>
 
 <p class="sr-only" role="status" id="status"></p>
@@ -927,7 +895,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
       <ui-command-list>
         <ui-command-group>
           <ui-command-group-label>Go to</ui-command-group-label>
-          <ui-command-item value="go:name" label="Replay top" keywords="home,start">Top: the replay<span class="hint">↑</span></ui-command-item>
+          <ui-command-item value="go:name" label="Top" keywords="home,start,replay">Top<span class="hint">↑</span></ui-command-item>
           <ui-command-item value="go:cs-h" label="Read the case study" keywords="eval,results">Read the case study</ui-command-item>
           <ui-command-item value="go:work-h" label="Work">Work</ui-command-item>
           <ui-command-item value="go:exp-h" label="Experience" keywords="education,cv,tools">Experience</ui-command-item>
@@ -939,8 +907,8 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
           <ui-command-group-label>Replay</ui-command-group-label>
           <ui-command-item value="replay" label="Replay again" keywords="play,restart">Replay the review again</ui-command-item>
           <ui-command-item value="skip" label="Skip to result" keywords="eval,chart">Skip to the result</ui-command-item>
-          <ui-command-item value="run:h1" label="Switch run Holdout 1" keywords="eval,chart">Switch run: Holdout 1</ui-command-item>
-          <ui-command-item value="run:h2" label="Switch run Holdout 2" keywords="eval,chart,partial">Switch run: Holdout 2, partial</ui-command-item>
+          <ui-command-item value="run:h1" label="Show run 1" keywords="eval,chart">Show run 1</ui-command-item>
+          <ui-command-item value="run:h2" label="Show run 2" keywords="eval,chart,unfinished">Show run 2</ui-command-item>
         </ui-command-group>
         <ui-command-separator></ui-command-separator>
         <ui-command-group>
@@ -986,7 +954,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
     { "t": "check", "f": "f3", "cost": 0.08 }, { "t": "verdict", "f": "f3", "cost": 0.03 },
     { "t": "check", "f": "f4", "cost": 0.11 }, { "t": "verdict", "f": "f4", "cost": 0.06 },
     { "t": "log", "who": "result", "msg": "2 kept, 2 disproved, $2.23", "cost": 0 },
-    { "t": "flip", "who": "eval", "msg": "one PR shows how; the holdout measures it", "cost": 0 }
+    { "t": "flip", "who": "eval", "msg": "This PR shows how it works; the test set measures it.", "cost": 0 }
   ]
 }
 </script>
@@ -1241,18 +1209,18 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
   /* ---------- eval chart ---------- */
   const RUNS = {
     h1: {
-      title: "Holdout 1",
-      claim: "The pipeline found two more of 15 bugs, but the intervals overlap: <b>not a proven win.</b>",
-      note: "Sonnet · 7 Nov 2026 · 20 PRs with 15 known bugs.",
+      title: "Run 1",
+      claim: "On this smaller run the pipeline found two more bugs, <b>inside the margin of error</b>, at 4.7 times the cost.",
+      note: "Sonnet · 7 Nov 2026 · 20 test PRs.",
       arms: [
         { id: "single", label: "single pass", found: 11, total: 15, ci: [48, 89], cost: 3.13 },
         { id: "pipeline", label: "pipeline", found: 13, total: 15, ci: [62, 96], cost: 14.58 },
       ],
     },
     h2: {
-      title: "Holdout 2, partial",
+      title: "Run 2 · unfinished",
       claim: "A single pass <b>matched</b> the multi-agent pipeline at about a fifth of the cost.",
-      note: "Opus 5.5 · 12 Nov 2026 · partial: both arms finished 53 of 82 holdout PRs.",
+      note: "Opus 5.5 · 12 Nov 2026 · both designs scored on the first 53 of 82 test PRs.",
       arms: [
         { id: "single", label: "single pass", found: 46, total: 56, ci: [70, 90], cost: 25.13 },
         { id: "pipeline", label: "pipeline", found: 42, total: 55, ci: null, cost: 124.04 },
@@ -1328,9 +1296,9 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
     // text that follows the run
     $("#ev-claim").innerHTML = R.claim;
     $("#ev-note").textContent = R.note;
-    $("#chart-t").textContent = `Recall with 95% intervals, ${R.title}`;
-    $("#chart-d").textContent = R.arms.map((a) => `${a.label} ${Math.round((100 * a.found) / a.total)}% recall, interval ${a.range[0]} to ${a.range[1]}%${a.computed ? ", computed from the counts" : ""}`).join(". ") + ".";
-    $("#ro-body").innerHTML = R.arms.map((a) => `<tr><th scope="row"><span class="sw" aria-hidden="true"></span>${a.label}</th><td>${a.found} of ${a.total}</td><td>${Math.round((100 * a.found) / a.total)}%</td><td>${a.range[0]}–${a.range[1]}${a.computed ? '<span class="cmp">computed from the counts</span>' : ""}</td><td>$${a.cost.toFixed(2)}</td></tr>`).join("");
+    $("#chart-t").textContent = `Recall with 95% ranges, ${R.title}`;
+    $("#chart-d").textContent = R.arms.map((a) => `${a.label} ${Math.round((100 * a.found) / a.total)}% recall, range ${a.range[0]} to ${a.range[1]}%${a.computed ? ", calculated from the counts" : ""}`).join(". ") + ".";
+    $("#ro-body").innerHTML = R.arms.map((a) => `<tr><th scope="row"><span class="sw" aria-hidden="true"></span>${a.label}</th><td>${a.found} of ${a.total}</td><td>${Math.round((100 * a.found) / a.total)}%</td><td>${a.range[0]}–${a.range[1]}</td><td>$${a.cost.toFixed(2)}</td></tr>`).join("");
     $$(".seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.run === name)));
   }
   $$(".seg button").forEach((b) => b.addEventListener("click", () => {
