@@ -1,0 +1,1415 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammad Nameer · Senior Software Engineer</title>
+<meta name="description" content="Senior software engineer in Hyderabad. I build LLM agents, MCP servers, and the evals that measure them, including a code-review agent measured against its own multi-agent pipeline.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Muhammad Nameer · Senior Software Engineer">
+<meta property="og:description" content="I build LLM agents, MCP servers, and the evals that measure them. A single-pass reviewer matched my multi-agent pipeline at about a fifth of the cost, on a partial holdout of 53 PRs.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0b0c'/%3E%3Crect x='3' y='4' width='2' height='8' fill='%23f5b544'/%3E%3Crect x='7' y='4' width='6' height='2' fill='%23ececea'/%3E%3Crect x='7' y='10' width='4' height='2' fill='%238f8f94'/%3E%3C/svg%3E">
+<script>document.documentElement.className = "js"</script>
+<script type="module" src="https://ui-sdk.dev/web@0.1.0-beta.6.js"></script>
+<link rel="stylesheet" href="https://ui-sdk.dev/web@0.1.0-beta.6.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+@layer ui-sdk;
+
+:root {
+  color-scheme: dark;
+  --bg: #0b0b0c;
+  --panel: #121214;
+  --panel-2: #0e0e10;
+  --raise: #17171a;
+  --rule: #232326;
+  --rule-2: #2e2e33;
+  --text: #ececea;
+  --body: #cfcfcb;
+  --code: #c8c8c4;
+  --muted: #8f8f94;
+  --faint: #66666c;
+  --accent: #f5b544;
+  --validator: #8ab4f8;
+  --kept: #5fd49a;
+  --disproved: #ff6b6b;
+  --add: #10241a;
+  --del: #2a1416;
+  --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: clamp(16px, 3vw, 44px);
+  --row: 18px;
+
+  /* ui-sdk theme, mapped onto the page palette */
+  --ui-background: var(--panel);
+  --ui-foreground: var(--text);
+  --ui-muted: #1d1d21;
+  --ui-muted-foreground: var(--muted);
+  --ui-border: var(--rule-2);
+  --ui-input: var(--rule-2);
+  --ui-ring: var(--accent);
+  --ui-ring-border: var(--accent);
+  --ui-overlay: rgb(6 6 7 / 0.74);
+  --ui-radius: 6px;
+  --ui-font-sans: var(--sans);
+  --ui-font-mono: var(--mono);
+  --ui-font-size: 0.875rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0; background: var(--bg); color: var(--body);
+  font: 400 16px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+::selection { background: rgb(245 181 68 / 0.3); color: var(--text); }
+a { color: var(--text); text-decoration: underline; text-decoration-color: #4a4a50; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .15s; }
+a:hover { text-decoration-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+button { font: inherit; color: inherit; }
+code, kbd { font-family: var(--mono); font-size: 0.92em; background: none; padding: 0; border-radius: 0; }
+h1, h2, h3 { color: var(--text); font-weight: 500; margin: 0; }
+p { margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.mono { font-family: var(--mono); }
+.label { font: 500 11.5px/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 10; padding: 8px 12px; background: var(--text); color: var(--bg); font: 500 13px var(--mono); border-radius: 4px; text-decoration: none; }
+.skip:focus { top: 12px; }
+.no-js .needs-js { display: none !important; }
+
+/* ---------- colour-coded nouns, shared by prose and replay ---------- */
+.n { color: var(--text); font-weight: 500; white-space: nowrap; }
+.n::before { display: inline-block; font-size: 0.62em; margin-right: 0.35em; transform: translateY(-0.12em); }
+.n-rev { color: var(--accent); } .n-rev::before { content: "●"; }
+.n-val { color: var(--validator); } .n-val::before { content: "◆"; }
+.n-kept { color: var(--kept); } .n-kept::before { content: "✓"; font-size: 0.8em; transform: none; }
+.n-dis { color: var(--disproved); } .n-dis::before { content: "✕"; font-size: 0.72em; transform: translateY(-0.05em); }
+
+/* ---------- first screen ---------- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
+  gap: clamp(32px, 4.2vw, 72px); align-items: center;
+  min-height: 100svh; max-width: 1680px; margin: 0 auto;
+  padding: 32px var(--pad) 28px;
+}
+.intro { max-width: 540px; }
+.intro h1 {
+  font: 500 clamp(54px, 5.7vw, 86px)/0.93 var(--sans); letter-spacing: -0.045em;
+  margin: 22px 0 28px; color: var(--text);
+}
+.lede { font-size: clamp(19px, 1.55vw, 22px); line-height: 1.42; color: var(--body); max-width: 25ch; letter-spacing: -0.01em; }
+.pinned { margin: 40px 0 0; padding: 14px 0 15px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font: 13.5px/1.75 var(--mono); color: var(--muted); }
+.pinned .label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 11px; }
+.pinned .label span:last-child { color: var(--faint); letter-spacing: 0.04em; }
+.pinned .res { color: var(--muted); }
+.pinned .res b { color: var(--text); font-weight: 500; }
+.pinned .res .vs { color: var(--faint); padding: 0 0.4em; }
+.pinned .fine { color: var(--muted); font-size: 12px; }
+.jump { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; margin-top: 30px; font: 13px/1.4 var(--mono); }
+.jump a { color: var(--body); }
+.jump a:hover { color: var(--text); }
+.kbd-btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 9px; margin-left: auto;
+  border: 1px solid var(--rule-2); border-radius: 5px; background: var(--raise); color: var(--muted);
+  font: 12px/1 var(--mono); cursor: pointer; transition: color .15s, border-color .15s;
+}
+.kbd-btn:hover { color: var(--text); border-color: #45454c; }
+.kbd-btn kbd, .kbd-btn [data-slot="dialog-shortcut"] { color: var(--text); font-size: 12px; }
+/* nothing from ui-sdk shows before its elements upgrade */
+ui-tooltip-content:not(:defined), ui-dialog-trigger:not(:defined) { display: none; }
+@media (hover: none) and (pointer: coarse) { .palette-hint { display: none !important; } }
+
+/* ---------- replay panel ---------- */
+.replay { margin: 0; min-width: 0; }
+.panel {
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 40px 80px -48px rgb(0 0 0 / 0.9);
+}
+.tabs { display: flex; align-items: stretch; height: 38px; background: var(--panel-2); border-bottom: 1px solid var(--rule); font: 12.5px/1 var(--mono); }
+.tab {
+  position: relative; display: inline-flex; align-items: center; padding: 0 16px;
+  background: none; border: 0; border-right: 1px solid var(--rule); color: var(--muted); cursor: pointer;
+}
+.tab:hover { color: var(--body); }
+.tab[aria-selected="true"] { color: var(--text); background: var(--panel); }
+.tab[aria-selected="true"]::after { content: ""; position: absolute; inset: auto 0 -1px; height: 1px; background: var(--panel); }
+.tab .ext { color: var(--faint); }
+.no-js .tab { cursor: default; }
+.tabs-meta { margin-left: auto; display: flex; align-items: center; gap: 10px; padding: 0 14px; color: var(--muted); white-space: nowrap; }
+.tabs-meta b { color: var(--text); font-weight: 400; }
+.panes { display: grid; }
+.pane { grid-area: 1 / 1; min-width: 0; }
+.pane.off { visibility: hidden; pointer-events: none; }
+.no-js .panes { display: block; }
+.no-js .pane-eval { border-top: 1px solid var(--rule); }
+.pane-diff { container: diff / inline-size; }
+
+.prbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 10px 16px 9px; border-bottom: 1px solid var(--rule); font: 12px/1.45 var(--mono); color: var(--muted); }
+.ln.hunk .path { color: var(--muted); }
+.prbar .num { color: var(--faint); }
+.prbar .t { color: var(--text); font: 500 13.5px/1.45 var(--sans); letter-spacing: -0.005em; }
+.prbar .st .a { color: #6cc596; } .prbar .st .d { color: #e07a7a; }
+.prbar .spend { margin-left: auto; white-space: nowrap; }
+.prbar .spend b { color: var(--text); font-weight: 400; font-variant-numeric: tabular-nums; }
+.prbar .spend i { font-style: normal; color: var(--faint); }
+
+.diff { overflow-x: auto; padding: 8px 0 10px; font: 12px/var(--row) var(--mono); }
+.code { position: relative; width: max-content; min-width: 100%; }
+.ln { position: relative; display: grid; grid-template-columns: 42px 18px max-content; min-height: var(--row); white-space: pre; color: var(--code); }
+.ln .no { color: var(--faint); text-align: right; padding-right: 12px; user-select: none; }
+.ln .sg { color: var(--faint); user-select: none; }
+.ln code { font-size: inherit; padding-right: 16px; }
+.ln.add { background: linear-gradient(90deg, var(--add) 60px, rgb(95 212 154 / 0.045) 60px); }
+.ln.add .sg { color: #4f9c76; }
+.ln.del { background: linear-gradient(90deg, var(--del) 60px, rgb(255 107 107 / 0.06) 60px); color: #9d9494; }
+.ln.del .sg { color: #b45a5a; }
+.ln.hunk { color: var(--faint); }
+.ln .kw { color: var(--muted); }
+.ln .fn { color: var(--text); }
+.ln .st { color: #b9b3a5; }
+.ln .nu { color: var(--text); }
+.ln[data-mark]::before { content: ""; position: absolute; left: 6px; top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.ln[data-mark="checking"]::before { background: var(--validator); border-radius: 1px; transform: rotate(45deg) scale(.9); }
+.ln[data-mark="kept"]::before { background: var(--kept); }
+.ln[data-mark="disproved"]::before { background: var(--disproved); }
+.ln[data-mark] .no { color: var(--muted); }
+.ln.active { box-shadow: inset 2px 0 0 var(--accent); background-image: linear-gradient(rgb(255 255 255 / 0.055), rgb(255 255 255 / 0.055)); }
+.ln.active .no { color: var(--text); }
+
+.note {
+  position: sticky; left: 10px; width: calc(100cqw - 20px); margin: 6px 0 10px;
+  white-space: normal; font: 12px/1.45 var(--sans); color: var(--body);
+  background: var(--raise); border: 1px solid var(--rule-2); border-left: 2px solid var(--accent); border-radius: 4px;
+  padding: 7px 10px 8px; transition: border-color .2s, opacity .2s;
+}
+.note-h { display: flex; gap: 8px; align-items: baseline; margin-bottom: 2px; font: 11px/1.4 var(--mono); color: var(--muted); }
+.note-h .who { color: var(--accent); }
+.note-h .who::before { content: "● "; font-size: 0.8em; }
+.note-h .sev { margin-left: auto; color: var(--faint); }
+.claim { transition: color .25s; }
+.claim .k { font: 10.5px var(--mono); color: var(--faint); margin-right: 4px; }
+.claim code { font-size: 11px; color: var(--text); }
+.note .val { margin-top: 5px; padding-top: 5px; border-top: 1px dashed var(--rule-2); font: 10.5px/1.45 var(--mono); color: var(--muted); }
+.note .val .chk { color: var(--validator); }
+.note .val .chk::before { content: "◆ "; font-size: 0.85em; }
+.note .val .ev { color: var(--body); }
+.note .verdict { font-weight: 500; white-space: nowrap; }
+.note[data-verdict="kept"] .verdict { color: var(--kept); }
+.note[data-verdict="disproved"] .verdict { color: var(--disproved); }
+.note[data-state="open"] .val, .note:not([data-state="final"]) .verdict { display: none; }
+.note[data-state="checking"] { border-left-color: var(--validator); }
+.note[data-state="checking"] .ev { display: none; }
+.note[data-state="checking"] .val .chk::after { content: "▍"; color: var(--validator); animation: blink 1s steps(2, start) infinite; margin-left: 2px; }
+.note[data-state="final"][data-verdict="kept"] { border-left-color: var(--kept); }
+.note[data-state="final"][data-verdict="disproved"] { border-left-color: var(--disproved); border-color: #2a2a2e; border-left-color: var(--disproved); background: #141416; }
+.note[data-state="final"][data-verdict="disproved"] .claim { color: var(--muted); text-decoration: line-through; text-decoration-color: rgb(255 107 107 / 0.75); text-decoration-thickness: 1px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; line-clamp: 1; overflow: hidden; }.note[data-state="final"][data-verdict="disproved"] .claim code { color: var(--muted); }
+.note.lit { border-color: #4a4a52; }
+
+/* margin notes need the script to place them; without it they stay inline under their lines */
+@container diff (min-width: 700px) {
+  .js .diff { overflow: visible; }
+  .js .note { position: absolute; left: auto; right: 12px; top: 0; width: min(296px, calc(100cqw - 460px)); margin: 0; z-index: 1; }
+}
+
+/* lanes and log */
+.run { display: grid; grid-template-columns: minmax(230px, 0.85fr) minmax(0, 1.4fr); border-top: 1px solid var(--rule); font: 11.5px/18px var(--mono); }
+.lanes, .log { list-style: none; margin: 0; padding: 9px 14px 10px; }
+.lanes { border-right: 1px solid var(--rule); }
+.lane { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto 66px; gap: 8px; align-items: center; color: var(--muted); }
+.lane .dot { font-size: 9px; color: var(--faint); }
+.lane .dot::before { content: "○"; }
+.lane[data-st="running"] .dot { color: var(--accent); } .lane[data-st="running"] .dot::before { content: "●"; }
+.lane[data-st="done"] .dot { color: #7a6a4a; } .lane[data-st="done"] .dot::before { content: "●"; }
+.lane.v .dot::before { content: "◇"; }
+.lane.v[data-st="running"] .dot { color: var(--validator); } .lane.v[data-st="running"] .dot::before { content: "◆"; }
+.lane.v[data-st="done"] .dot { color: #5a6f94; } .lane.v[data-st="done"] .dot::before { content: "◆"; }
+.lane .nm { color: var(--body); }
+.lane[data-st="idle"] .nm { color: var(--muted); }
+.lane .ct { color: var(--text); font-variant-numeric: tabular-nums; text-align: right; }
+.lane .st { color: var(--faint); }
+.lane[data-st="running"] .st { color: var(--muted); }
+.lane.active .st::after { content: "▍"; color: var(--accent); animation: blink 1s steps(2, start) infinite; margin-left: 2px; }
+.lane.v.active .st::after { color: var(--validator); }
+.lane .ct .k { color: var(--kept); } .lane .ct .x { color: var(--disproved); }
+.log li { display: grid; grid-template-columns: 22px 78px minmax(0, 1fr); gap: 8px; white-space: nowrap; color: var(--body); }
+.log li > span { overflow: hidden; text-overflow: ellipsis; }
+.log .i { color: var(--faint); }
+.log .w { color: var(--muted); }
+.log .w.rev { color: var(--accent); } .log .w.val { color: var(--validator); }
+.log li.kept .m { color: var(--kept); } .log li.disproved .m { color: var(--disproved); }
+.log li:last-child .m { color: var(--text); }
+.js .log li:last-child { animation: in .18s ease-out; }
+
+/* eval pane */
+.pane-eval { padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 14px; }
+.ev-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.seg { display: inline-flex; border: 1px solid var(--rule-2); border-radius: 5px; padding: 2px; gap: 2px; background: var(--panel-2); }
+.seg button { border: 0; background: none; color: var(--muted); font: 12px/1 var(--mono); padding: 7px 10px; border-radius: 3px; cursor: pointer; }
+.seg button:hover { color: var(--text); }
+.seg button[aria-pressed="true"] { background: #232327; color: var(--text); }
+.ev-claim { font: 500 clamp(19px, 1.7vw, 24px)/1.3 var(--sans); color: var(--text); letter-spacing: -0.015em; max-width: 34ch; min-height: 2.7em; }
+.ev-claim b { font-weight: 500; color: var(--accent); }
+.chart { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--mono); }
+.chart .tick-l { fill: var(--faint); font-size: 10.5px; }
+.chart .grid { stroke: var(--rule); stroke-width: 1; }
+.chart .grid.base { stroke: var(--rule-2); }
+.chart .arm-l { fill: var(--body); font-size: 11.5px; }
+.chart .wh, .chart .cap { stroke-width: 1.5; }
+.chart [data-arm="single"] { --c: var(--text); }
+.chart [data-arm="pipeline"] { --c: var(--accent); }
+.chart .wh, .chart .cap { stroke: var(--c); opacity: 0.55; }
+.chart .wh.computed { stroke-dasharray: 3 3; }
+.chart .pt { fill: var(--c); }
+.chart .pv { fill: var(--c); font-size: 11.5px; }
+.chart .off { display: none; }
+.chart .sec-l { fill: var(--faint); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+.chart .cbar { fill: var(--c); opacity: 0.5; }
+.chart .cv { fill: var(--c); font-size: 11.5px; }
+.chart .cv .x { fill: var(--muted); }
+.ro { width: 100%; border-collapse: collapse; font: 12px/1.5 var(--mono); color: var(--body); font-variant-numeric: tabular-nums; }
+.ro th, .ro td { text-align: left; padding: 7px 10px 7px 0; border-top: 1px solid var(--rule); font-weight: 400; vertical-align: baseline; }
+.ro thead th { color: var(--faint); border-top: 0; padding-bottom: 4px; font-size: 11px; }
+.ro tbody th { color: var(--text); white-space: nowrap; }
+.ro .sw { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; background: var(--text); }
+.ro tr:nth-child(2) .sw { background: var(--accent); }
+.ro .cost { white-space: nowrap; }
+.ro .cb { display: inline-block; vertical-align: middle; height: 6px; width: calc(var(--w) * 64px); min-width: 3px; margin-right: 8px; background: var(--faint); border-radius: 1px; transition: width .45s cubic-bezier(.2,.7,.2,1); }
+.ro .cmp { display: block; color: var(--muted); font-size: 11px; }
+.ev-note { font: 12px/1.6 var(--mono); color: var(--muted); max-width: 92ch; }
+.ev-links { display: flex; gap: 22px; }
+.ev-key { display: flex; flex-wrap: wrap; gap: 4px 18px; font: 11px/1.5 var(--mono); color: var(--faint); }
+.ev-key span { display: inline-flex; align-items: center; gap: 7px; }
+.ev-key i { display: inline-block; }
+.ev-key .k-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.ev-key .k-wh { width: 18px; height: 7px; border: 1.5px solid var(--muted); border-width: 0 1.5px; background: linear-gradient(var(--muted), var(--muted)) center / 100% 1.5px no-repeat; }
+.ev-key .k-dash { width: 18px; height: 1.5px; background: repeating-linear-gradient(90deg, var(--muted) 0 3px, transparent 3px 6px); }
+.ev-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--rule); }
+.textbtn { background: none; border: 0; padding: 0; color: var(--body); font: 12.5px/1.4 var(--mono); text-decoration: underline; text-decoration-color: #4a4a50; text-underline-offset: 3px; cursor: pointer; }
+.textbtn:hover { color: var(--text); text-decoration-color: var(--accent); }
+
+/* controls */
+.controls { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-top: 1px solid var(--rule); background: var(--panel-2); font: 12px/1 var(--mono); color: var(--muted); }
+.ctl { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 28px; min-width: 30px; padding: 0 9px; border: 1px solid var(--rule-2); border-radius: 4px; background: transparent; color: var(--text); font: 12px/1 var(--mono); cursor: pointer; white-space: nowrap; transition: border-color .15s, background .15s; }
+.ctl:hover { border-color: #4a4a52; background: #1a1a1d; }
+.ctl svg { width: 12px; height: 12px; fill: currentColor; }
+.ctl .i-pause { display: none; }
+.playing .ctl.play .i-play { display: none; }
+.playing .ctl.play .i-pause { display: block; }
+.ruler { position: relative; flex: 1; min-width: 120px; height: 28px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; cursor: pointer; touch-action: none; border-radius: 3px; }
+.ruler .tk { width: 1px; height: 8px; background: #3a3a40; transition: height .15s, background-color .15s; }
+.ruler .tk.major { height: 12px; }
+.ruler .tk.past { background: #75757b; }
+.ruler .tk.v-kept.past { background: var(--kept); }
+.ruler .tk.v-disproved.past { background: var(--disproved); }
+.ruler .tk.cur { height: 20px; width: 2px; background: var(--accent); }
+.ruler:hover .tk:not(.cur) { background-color: #5a5a60; }
+.ruler:hover .tk.past.v-kept { background: var(--kept); }
+.ruler:hover .tk.past.v-disproved { background: var(--disproved); }
+.count { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 40px; text-align: right; }
+.count b { color: var(--text); font-weight: 400; }
+
+.replay figcaption { margin-top: 12px; font: 12px/1.5 var(--mono); color: var(--muted); }
+
+@keyframes blink { to { visibility: hidden; } }
+@keyframes in { from { opacity: 0; transform: translateY(4px); } }
+.js .note:not([hidden]) { animation: in .18s ease-out; }
+.js .note .val { animation: in .18s ease-out; }
+
+/* ---------- reading sections ---------- */
+.section {
+  max-width: 1680px; margin: 0 auto; padding: 88px var(--pad) 0;
+  display: grid; grid-template-columns: 200px minmax(0, 660px) minmax(220px, 1fr); column-gap: 56px;
+}
+.section > .side-label { grid-column: 1; padding-top: 18px; border-top: 1px solid var(--rule); }
+.section > .side-label p + p { margin-top: 4px; color: var(--faint); }
+.section > .body { grid-column: 2 / 4; padding-top: 18px; border-top: 1px solid var(--rule); min-width: 0; }
+.h2 { font: 500 clamp(26px, 2.2vw, 32px)/1.15 var(--sans); letter-spacing: -0.025em; color: var(--text); }
+:target, [tabindex="-1"]:focus { scroll-margin-top: 24px; }
+h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
+
+/* case study */
+/* a 660px reading column; sidenotes float into the margin beside it */
+.cs { max-width: 976px; counter-reset: part; }
+.cs h2 { font: 500 clamp(32px, 3.3vw, 48px)/1.06 var(--sans); letter-spacing: -0.035em; max-width: 17ch; }
+.cs .dek { margin-top: 18px; font-size: clamp(18px, 1.45vw, 20px); line-height: 1.5; color: var(--muted); max-width: 46ch; }
+.cs-part { clear: both; display: flow-root; }
+.cs h3 { max-width: 660px; margin-top: 52px; font: 500 21px/1.3 var(--sans); letter-spacing: -0.015em; counter-increment: part; }
+.cs h3::before { content: counter(part, decimal-leading-zero); display: inline-block; width: 34px; font: 12px/1 var(--mono); color: var(--faint); vertical-align: 3px; }
+.cs .prose, .cs .list, .cs .takeaway { max-width: 660px; }
+.cs .prose { margin-top: 16px; font-size: 17px; line-height: 1.72; color: var(--body); }
+.cs .list { margin: 16px 0 0; padding: 0; list-style: none; font-size: 16.5px; line-height: 1.6; color: var(--body); }
+.cs .list li { position: relative; padding: 6px 0 6px 34px; }
+.cs .list li::before { content: ""; position: absolute; left: 4px; top: 1.05em; width: 12px; height: 1px; background: var(--faint); }
+.cs ol.list { counter-reset: step; }
+.cs ol.list li { counter-increment: step; }
+.cs ol.list li::before { content: counter(step); top: 7px; width: auto; height: auto; background: none; font: 12px/1.9 var(--mono); color: var(--faint); }
+.cs .side { float: right; clear: right; width: 260px; margin: 22px 0 18px 56px; padding-left: 14px; border-left: 1px solid var(--rule-2); font-size: 13px; line-height: 1.6; color: var(--muted); }
+.cs .side .label { display: block; margin-bottom: 6px; color: var(--faint); }
+.snref { font: 500 10.5px var(--mono); color: var(--muted); vertical-align: super; line-height: 0; margin-left: 2px; text-decoration: none; }
+.cs .takeaway { margin-top: 52px; padding: 18px 0 18px 22px; border-left: 2px solid var(--accent); font: 500 clamp(19px, 1.6vw, 22px)/1.45 var(--sans); letter-spacing: -0.012em; color: var(--text); }
+.cs .takeaway span { display: block; margin-top: 8px; font-weight: 400; font-size: 17px; line-height: 1.6; color: var(--muted); letter-spacing: 0; }
+
+/* both holdout runs, drawn with CSS so they read without the script */
+.runs { clear: both; max-width: 760px; margin: 28px 0 0; }
+.runs-plot { --rl: 96px; padding: 4px 0 6px; }
+.rrow { display: grid; grid-template-columns: var(--rl) minmax(0, 1fr) 44px; gap: 14px; align-items: center; height: 28px; font: 12px/1 var(--mono); }
+.rrow .rl { color: var(--body); }
+.rrow .rv { text-align: right; font-variant-numeric: tabular-nums; }
+.rrow.s { --c: var(--text); } .rrow.p { --c: var(--accent); }
+.rrow .rv { color: var(--c); }
+.tr { position: relative; height: 100%; background: repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px calc(100% / 6)); border-right: 1px solid var(--rule); }
+.tr .ci { position: absolute; top: 50%; height: 1.5px; margin-top: -0.75px; left: calc((var(--lo) - 40) / 60 * 100%); width: calc((var(--hi) - var(--lo)) / 60 * 100%); background: var(--c); opacity: 0.6; }
+.tr .ci::before, .tr .ci::after { content: ""; position: absolute; top: -5px; width: 1.5px; height: 11px; background: var(--c); }
+.tr .ci::before { left: 0; } .tr .ci::after { right: 0; }
+.tr .ci.computed { background: repeating-linear-gradient(90deg, var(--c) 0 3px, transparent 3px 6px); }
+.tr .pt { position: absolute; top: 50%; left: calc((var(--p) - 40) / 60 * 100%); width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--c); }
+.rrow.axis { height: 18px; }
+.rrow.axis .tr { background: none; border: 0; }
+.rrow.axis i { position: absolute; left: calc((var(--p) - 40) / 60 * 100%); translate: -50% 0; font: normal 10.5px/1 var(--mono); color: var(--faint); }
+.runs .rg { margin: 12px 0 2px; font: 11px/1.4 var(--mono); letter-spacing: 0.04em; color: var(--muted); }
+.runs .ro { margin-top: 18px; }
+.runs .ro td { white-space: nowrap; }
+.runs .ro .cmp { white-space: normal; }
+.runs .ro .grp th { padding-top: 14px; color: var(--muted); font-size: 11px; letter-spacing: 0.04em; white-space: normal; }
+.runs figcaption { margin-top: 12px; font: 12px/1.6 var(--mono); color: var(--muted); }
+
+/* experience */
+.ledger.exp .where { color: var(--muted); }
+.tools { margin-top: 24px; max-width: 96ch; font: 12.5px/1.75 var(--mono); color: var(--muted); }
+.tools .label { margin-right: 12px; color: var(--faint); }
+
+/* work ledger */
+.ledger { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 15px; line-height: 1.5; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 16px 24px 16px 0; border-top: 1px solid var(--rule); font-weight: 400; }
+.ledger thead th { padding: 0 24px 10px 0; border-top: 0; }
+.ledger tbody tr:last-child > * { border-bottom: 1px solid var(--rule); }
+.ledger .yr { width: 190px; } /* shared by both ledgers so their columns line up */
+.ledger td.yr { font: 13px/1.6 var(--mono); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ledger .thing { width: 42%; }
+.ledger .thing b { display: block; font-weight: 500; color: var(--text); }
+.ledger .thing span { display: block; margin-top: 3px; font-size: 13.5px; color: var(--muted); }
+.ledger .proves { color: var(--body); padding-right: 0; }
+.ledger tbody tr { transition: background-color .15s; }
+.ledger tbody tr:hover { background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.02) 20%, rgb(255 255 255 / 0.02)); }
+
+/* beliefs */
+.beliefs { list-style: none; margin: 22px 0 0; padding: 0; counter-reset: b; }
+.beliefs li { counter-increment: b; display: grid; grid-template-columns: 44px minmax(0, 1fr); padding: 20px 0 22px; border-top: 1px solid var(--rule); }
+.beliefs li:last-child { border-bottom: 1px solid var(--rule); }
+.beliefs li::before { content: counter(b, decimal-leading-zero); font: 12px/2.1 var(--mono); color: var(--faint); }
+.beliefs h3 { font: 500 clamp(19px, 1.6vw, 22px)/1.3 var(--sans); letter-spacing: -0.015em; }
+.beliefs p { grid-column: 2; margin-top: 6px; max-width: 66ch; color: var(--muted); font-size: 15.5px; line-height: 1.6; }
+
+/* contact */
+.contact-line { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.6; color: var(--muted); letter-spacing: -0.01em; }
+.contact-line a { color: var(--text); }
+.contact-line .email { font: 400 0.86em var(--mono); letter-spacing: 0; }
+.contact-line .dot { color: var(--faint); padding: 0 0.35em; }
+.copy { margin-left: 6px; padding: 2px 7px; vertical-align: 3px; border: 1px solid var(--rule-2); border-radius: 4px; background: none; color: var(--muted); font: 11px/1.4 var(--mono); cursor: pointer; }
+.copy:hover { color: var(--text); border-color: #4a4a52; }
+
+/* colophon */
+.colophon { max-width: 1680px; margin: 96px auto 0; padding: 18px var(--pad) 30px; }
+.colophon p { display: flex; flex-wrap: wrap; gap: 6px 22px; padding-top: 16px; border-top: 1px solid var(--rule); font: 11.5px/1.5 var(--mono); color: var(--faint); }
+.colophon b { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+
+/* ---------- command palette (ui-sdk dialog + command) ---------- */
+[data-slot="dialog-backdrop"] { background: rgb(6 6 7 / 0.72); backdrop-filter: blur(2px); }
+.palette[data-slot="dialog-content"] {
+  position: fixed; inset: 10vh auto auto 50%; translate: -50% 0; margin: 0; padding: 0;
+  width: min(560px, calc(100vw - 32px)); max-height: 80vh; overflow: hidden;
+  background: var(--panel); color: var(--text); border: 1px solid var(--rule-2); border-radius: 8px;
+  box-shadow: 0 40px 100px -30px rgb(0 0 0 / 0.9);
+  transition: opacity .16s ease-out, translate .2s cubic-bezier(.2,.7,.2,1);
+}
+.palette[data-starting-style], .palette[data-ending-style] { opacity: 0; translate: -50% 6px; }
+.palette [data-slot="command"] { width: 100%; border: 0; border-radius: 0; background: transparent; font: 13.5px/1.4 var(--sans); }
+.cmd-in { display: flex; align-items: center; gap: 10px; padding: 0 14px; height: 50px; border-bottom: 1px solid var(--rule); }
+.cmd-in .prompt { font: 15px var(--mono); color: var(--accent); }
+.cmd-in [data-slot="command-input"] { flex: 1; display: flex; }
+.cmd-in input { flex: 1; min-width: 0; height: 48px; border: 0; outline: 0; background: transparent; color: var(--text); font: 15px/1 var(--sans); letter-spacing: -0.005em; }
+.cmd-in input::placeholder { color: var(--faint); }
+.cmd-in kbd { font: 11px/1 var(--mono); color: var(--faint); border: 1px solid var(--rule-2); border-radius: 3px; padding: 3px 5px; }
+.palette [data-slot="command-list"] { max-height: min(64vh, 560px); padding: 6px; }
+.palette [data-slot="command-group-label"] { padding: 10px 10px 4px; font: 500 10.5px/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+.palette [data-slot="command-item"] { display: flex; align-items: center; gap: 10px; min-height: 34px; padding: 0 10px; border-radius: 5px; color: var(--body); cursor: pointer; }
+.palette [data-slot="command-item"][data-highlighted] { background: #1f1f23; color: var(--text); box-shadow: inset 2px 0 0 var(--accent); }
+.palette [data-slot="command-item"] .hint { margin-left: auto; font: 11px var(--mono); color: var(--faint); }
+.palette [data-slot="command-separator"] { height: 1px; margin: 6px 4px; background: var(--rule); }
+.palette [data-slot="command-empty"]:not(:empty) { padding: 18px 16px; font: 12.5px var(--mono); color: var(--muted); }
+
+/* tooltip */
+[data-slot="tooltip-content"] {
+  padding: 6px 9px; background: #232327; color: var(--text); border: 1px solid #34343a; border-radius: 4px;
+  font: 11.5px/1.4 var(--mono); max-width: 260px; transform-origin: var(--transform-origin);
+  transition: opacity .14s ease-out, scale .14s ease-out;
+}
+[data-slot="tooltip-content"]:is([data-starting-style], [data-ending-style]) { opacity: 0; scale: 0.96; }
+[data-slot="tooltip-content"][data-instant] { transition: none; }
+
+/* toast */
+[data-slot="toast-region"] { position: fixed; z-index: 60; bottom: 28px; left: 50%; translate: -50% 0; width: min(300px, calc(100vw - 32px)); height: var(--toast-front-height); margin: 0; padding: 0; border: 0; background: none; overflow: visible; }
+[data-slot="toast"] {
+  position: absolute; inset-inline: 0; bottom: 0; display: flex; align-items: center; justify-content: center; gap: 10px;
+  height: var(--toast-height); padding: 11px 14px; white-space: nowrap;
+  background: #1c1c1f; color: var(--text); border: 1px solid #34343a; border-radius: 6px;
+  box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.9); font: 12.5px/1.4 var(--mono); user-select: none;
+  translate: var(--toast-swipe-x, 0px) var(--toast-swipe-y, 0px);
+  transition: translate .3s cubic-bezier(.2,.7,.2,1), opacity .2s;
+}
+[data-slot="toast"][data-starting-style] { opacity: 0; translate: 0 10px; }
+[data-slot="toast"][data-ending-style] { opacity: 0; }
+[data-slot="toast"] .tk { color: var(--kept); }
+[data-slot="toast-title"] { flex: 0 1 auto; font: inherit; font-weight: 400; margin: 0; }
+[data-slot="toast-description"]:empty { display: none; }
+[data-slot="toast-description"] { color: var(--muted); }
+
+/* ---------- small screens ---------- */
+/* below this width the margin is too narrow for sidenotes, so they sit after their paragraph */
+@media (max-width: 1340px) {
+  .cs-part { display: flex; flex-direction: column; }
+  .cs .side { order: 99; float: none; width: auto; max-width: 660px; margin: 18px 0 0; }
+}
+@media (max-width: 1080px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-top: 48px; gap: 40px; align-items: start; }
+  .intro { max-width: 620px; }
+  .section { grid-template-columns: minmax(0, 1fr); padding-top: 72px; }
+  .section > .side-label { display: flex; gap: 14px; padding-bottom: 0; }
+  .section > .side-label p + p { margin-top: 0; }
+  .section > .body { grid-column: 1; border-top: 0; padding-top: 14px; }
+  .ledger .yr { width: 160px; }
+}
+@media (max-width: 640px) {
+  .intro h1 { font-size: clamp(48px, 14vw, 60px); margin: 18px 0 20px; }
+  .pinned { font-size: 12px; }
+  .pinned .res .vs { display: block; height: 0; overflow: hidden; }
+  .pinned .res span { display: block; }
+  .kbd-btn { margin-left: 0; }
+  .tabs { font-size: 12px; }
+  .tab { padding: 0 12px; }
+  .tabs-meta { display: none; }
+  .prbar .spend { margin-left: 0; }
+  .diff { font-size: 11.5px; }
+  .run { grid-template-columns: minmax(0, 1fr); }
+  .lanes { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .controls { flex-wrap: wrap; row-gap: 6px; }
+  .ruler { order: 5; flex-basis: 100%; }
+  .count { margin-left: auto; }
+  .pane-eval { padding: 18px 14px 16px; }
+  .ro { font-size: 11.5px; }
+  #pane-eval .ro thead th:nth-child(5), #pane-eval .ro td:nth-child(5) { display: none; }
+  .runs-plot { --rl: 78px; }
+  .rrow { gap: 10px; font-size: 11.5px; }
+  .runs .ro th, .runs .ro td { padding-right: 8px; }
+  .cs h3::before { width: 28px; }
+  .cs .takeaway { padding-left: 16px; }
+  .ledger, .ledger tbody, .ledger tr, .ledger td, .ledger th { display: block; width: auto; }
+  .ledger thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .ledger tbody tr { padding: 14px 0 16px; border-top: 1px solid var(--rule); }
+  .ledger tbody tr:last-child { border-bottom: 1px solid var(--rule); }
+  .ledger tbody tr:last-child > * { border-bottom: 0; }
+  .ledger td, .ledger th { border-top: 0; padding: 0; }
+  .ledger .thing, .ledger .yr { width: auto; }
+  .ledger .thing { margin-top: 4px; }
+  .ledger .proves { margin-top: 8px; font-size: 14.5px; }
+  .beliefs li { grid-template-columns: 34px minmax(0, 1fr); }
+  .contact-line .dot { padding: 0 0.2em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#case-study">Skip to the case study</a>
+
+<main id="main">
+  <section class="hero" aria-labelledby="name">
+    <div class="intro">
+      <p class="label">Senior Software Engineer · Hyderabad</p>
+      <h1 id="name" tabindex="-1">Muhammad<br>Nameer</h1>
+      <p class="lede">I build LLM agents, MCP servers, and the evals that measure them.</p>
+
+      <div class="pinned" role="group" aria-labelledby="pinned-l">
+        <p class="label" id="pinned-l"><span>Result · code-review eval</span><span>pinned</span></p>
+        <p class="res"><span>single pass <b>82%</b> recall · <b>$25</b></span><span class="vs">vs</span><span>multi-agent <b>76%</b> · <b>$124</b></span></p>
+        <p class="fine">partial holdout of 53 PRs · agent-labelled bugs</p>
+      </div>
+
+      <nav class="jump" aria-label="On this page">
+        <a href="#case-study">Case study</a>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#beliefs">Beliefs</a>
+        <a href="#contact">Contact</a>
+        <span class="needs-js palette-hint" style="margin-left:auto">
+          <ui-tooltip delay="250">
+            <ui-tooltip-trigger>
+              <ui-dialog-trigger for="palette" shortcut="mod+k">
+                <button class="kbd-btn" type="button" aria-label="Open the command palette">
+                  <ui-dialog-shortcut></ui-dialog-shortcut>
+                </button>
+              </ui-dialog-trigger>
+            </ui-tooltip-trigger>
+            <ui-tooltip-content side="top" side-offset="8">Jump to a section, replay the review, copy my email</ui-tooltip-content>
+          </ui-tooltip>
+        </span>
+      </nav>
+    </div>
+
+    <figure class="replay" id="replay" aria-labelledby="replay-cap">
+      <div class="panel">
+        <div class="tabs" role="tablist" aria-label="Replay views">
+          <button class="tab" role="tab" id="tab-diff" aria-controls="pane-diff" aria-selected="true">pr-418<span class="ext">.diff</span></button>
+          <button class="tab" role="tab" id="tab-eval" aria-controls="pane-eval" aria-selected="false" tabindex="-1">eval<span class="ext">.svg</span></button>
+          <div class="tabs-meta" id="runsize">code-review agent · <b>standard: 3 lenses</b></div>
+        </div>
+
+        <div class="panes">
+        <div class="pane pane-diff" id="pane-diff" role="tabpanel" aria-labelledby="tab-diff">
+          <div class="prbar">
+            <span class="num">#418</span>
+            <span class="t">Page through list_items, retry on 429</span>
+            <span class="st"><span class="a">+22</span> <span class="d">−4</span></span>
+            <span class="spend">spend <b id="spend">$2.23</b> / cap $15.00 <i>· illustrative</i></span>
+          </div>
+
+          <div class="diff" id="diff" role="region" aria-label="Pull request diff with review findings" tabindex="0">
+            <div class="code" id="code">
+<div class="ln hunk"><span class="no"></span><span class="sg"></span><code>@@ -1,5 +1,23 @@  <span class="path">src/client/paging.py</span></code></div>
+<div class="ln add" data-n="1"><span class="no">1</span><span class="sg">+</span><code><span class="kw">import</span> time</code></div>
+<div class="ln add" data-n="2"><span class="no">2</span><span class="sg">+</span><code> </code></div>
+<div class="ln del"><span class="no"></span><span class="sg">−</span><code><span class="kw">from</span> .http <span class="kw">import</span> get_json</code></div>
+<div class="ln add" data-n="3"><span class="no">3</span><span class="sg">+</span><code><span class="kw">from</span> .http <span class="kw">import</span> RateLimited, get_json</code></div>
+<div class="ln" data-n="4"><span class="no">4</span><span class="sg"> </span><code> </code></div>
+<div class="ln add" data-n="5"><span class="no">5</span><span class="sg">+</span><code><span class="kw">def</span> <span class="fn">_get_page</span>(session, path, params, tries=<span class="nu">4</span>):</code></div>
+<div class="ln add" data-n="6"><span class="no">6</span><span class="sg">+</span><code>    <span class="kw">for</span> attempt <span class="kw">in</span> range(tries):</code></div>
+<div class="note" role="note" data-f="f4" data-line="6" data-state="final" data-verdict="kept" aria-label="Finding 4, behaviour lens, line 6">
+  <p class="note-h"><span class="who">behaviour</span><span>L6</span><span class="sev">P3</span><span class="verdict">✓ kept</span></p>
+  <p class="claim"><span class="k">when</span>four 429s arrive in a row <span class="k">then</span>L11 sleeps 8 s after the last try before L12 raises</p>
+  <p class="val"><span class="chk">runs the smallest test</span><span class="ev">: 8 s wasted</span></p>
+</div>
+<div class="ln add" data-n="7"><span class="no">7</span><span class="sg">+</span><code>        <span class="kw">try</span>:</code></div>
+<div class="ln add" data-n="8"><span class="no">8</span><span class="sg">+</span><code>            <span class="kw">return</span> get_json(session, path, params)</code></div>
+<div class="ln add" data-n="9"><span class="no">9</span><span class="sg">+</span><code>        <span class="kw">except</span> RateLimited <span class="kw">as</span> err:</code></div>
+<div class="ln add" data-n="10"><span class="no">10</span><span class="sg">+</span><code>            wait = err.retry_after <span class="kw">or</span> <span class="nu">2</span> ** attempt</code></div>
+<div class="note" role="note" data-f="f2" data-line="10" data-state="final" data-verdict="disproved" aria-label="Finding 2, behaviour lens, line 10">
+  <p class="note-h"><span class="who">behaviour</span><span>L10</span><span class="sev">P2</span><span class="verdict">✕ disproved</span></p>
+  <p class="claim"><span class="k">when</span>Retry-After arrives as a string, <code>"3"</code> <span class="k">then</span><code>time.sleep("3")</code> on L11 raises TypeError</p>
+  <p class="val"><span class="chk">looks for a guard upstream</span><span class="ev">: http.py:31</span></p>
+</div>
+<div class="ln add" data-n="11"><span class="no">11</span><span class="sg">+</span><code>            time.sleep(wait)</code></div>
+<div class="ln add" data-n="12"><span class="no">12</span><span class="sg">+</span><code>    <span class="kw">raise</span> RateLimited(<span class="st">f"gave up after {tries} tries"</span>)</code></div>
+<div class="ln add" data-n="13"><span class="no">13</span><span class="sg">+</span><code> </code></div>
+<div class="ln del"><span class="no"></span><span class="sg">−</span><code><span class="kw">def</span> <span class="fn">list_items</span>(session, path, limit=<span class="nu">100</span>):</code></div>
+<div class="ln del"><span class="no"></span><span class="sg">−</span><code>    page = get_json(session, path, {<span class="st">"limit"</span>: limit})</code></div>
+<div class="ln del"><span class="no"></span><span class="sg">−</span><code>    <span class="kw">return</span> page[<span class="st">"items"</span>]</code></div>
+<div class="ln add" data-n="14"><span class="no">14</span><span class="sg">+</span><code><span class="kw">def</span> <span class="fn">list_items</span>(session, path, limit=<span class="nu">200</span>):</code></div>
+<div class="note" role="note" data-f="f1" data-line="14" data-state="final" data-verdict="kept" aria-label="Finding 1, boundaries lens, line 14">
+  <p class="note-h"><span class="who">boundaries</span><span>L14</span><span class="sev">P1</span><span class="verdict">✓ kept</span></p>
+  <p class="claim"><span class="k">when</span>the API caps <code>limit</code> at 100 <span class="k">then</span>L20 stops after page one: 100 of 340 items, no error</p>
+  <p class="val"><span class="chk">runs the smallest test</span><span class="ev">: got 100 of 340</span></p>
+</div>
+<div class="ln add" data-n="15"><span class="no">15</span><span class="sg">+</span><code>    items, offset = [], <span class="nu">0</span></code></div>
+<div class="ln add" data-n="16"><span class="no">16</span><span class="sg">+</span><code>    <span class="kw">for</span> _ <span class="kw">in</span> range(<span class="nu">500</span>):</code></div>
+<div class="ln add" data-n="17"><span class="no">17</span><span class="sg">+</span><code>        params = {<span class="st">"limit"</span>: limit, <span class="st">"offset"</span>: offset}</code></div>
+<div class="ln add" data-n="18"><span class="no">18</span><span class="sg">+</span><code>        page = _get_page(session, path, params)</code></div>
+<div class="ln add" data-n="19"><span class="no">19</span><span class="sg">+</span><code>        items.extend(page[<span class="st">"items"</span>])</code></div>
+<div class="ln add" data-n="20"><span class="no">20</span><span class="sg">+</span><code>        <span class="kw">if</span> len(page[<span class="st">"items"</span>]) &lt; limit:</code></div>
+<div class="ln add" data-n="21"><span class="no">21</span><span class="sg">+</span><code>            <span class="kw">return</span> items</code></div>
+<div class="ln add" data-n="22"><span class="no">22</span><span class="sg">+</span><code>        offset += limit</code></div>
+<div class="ln add" data-n="23"><span class="no">23</span><span class="sg">+</span><code>    <span class="kw">raise</span> RuntimeError(<span class="st">f"{path}: more than 500 pages"</span>)</code></div>
+<div class="note" role="note" data-f="f3" data-line="23" data-state="final" data-verdict="disproved" aria-label="Finding 3, lines lens, line 23">
+  <p class="note-h"><span class="who">lines</span><span>L23</span><span class="sev">P2</span><span class="verdict">✕ disproved</span></p>
+  <p class="claim"><span class="k">when</span>a collection fills exactly 500 pages <span class="k">then</span>L23 raises RuntimeError after reading every item</p>
+  <p class="val"><span class="chk">checks it is reachable</span><span class="ev">: 100 pages max</span></p>
+</div>
+            </div>
+          </div>
+
+          <div class="run">
+            <ul class="lanes" aria-label="Agents in this run">
+              <li class="lane" data-lane="behaviour" data-st="done"><span class="dot" aria-hidden="true"></span><span class="nm">behaviour</span><span class="ct">2</span><span class="st">done</span></li>
+              <li class="lane" data-lane="boundaries" data-st="done"><span class="dot" aria-hidden="true"></span><span class="nm">boundaries</span><span class="ct">1</span><span class="st">done</span></li>
+              <li class="lane" data-lane="lines" data-st="done"><span class="dot" aria-hidden="true"></span><span class="nm">lines</span><span class="ct">1</span><span class="st">done</span></li>
+              <li class="lane v" data-lane="validators" data-st="done"><span class="dot" aria-hidden="true"></span><span class="nm">validators</span><span class="ct"><span class="k">2✓</span> <span class="x">2✕</span></span><span class="st">done</span></li>
+            </ul>
+            <ol class="log" id="log" aria-label="Run log">
+              <li><span class="i">17</span><span class="w val">validator</span><span class="m">L6: runs the smallest test</span></li>
+              <li class="kept"><span class="i">18</span><span class="w val">validator</span><span class="m">L6 kept: sleeps after try 4, 8 s wasted</span></li>
+              <li><span class="i">19</span><span class="w">result</span><span class="m">2 kept, 2 disproved, $2.23</span></li>
+              <li><span class="i">20</span><span class="w">eval</span><span class="m">one PR shows how; the holdout measures it</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pane pane-eval" id="pane-eval" role="tabpanel" aria-labelledby="tab-eval">
+          <div class="ev-head">
+            <p class="label">Recall on agent-labelled bugs · 95% interval</p>
+            <div class="seg needs-js" role="group" aria-label="Eval run">
+              <button type="button" data-run="h1" aria-pressed="false">Holdout 1</button>
+              <button type="button" data-run="h2" aria-pressed="true">Holdout 2 · partial</button>
+            </div>
+          </div>
+          <p class="ev-claim" id="ev-claim">A single pass <b>matched</b> the multi-agent pipeline at about a fifth of the cost.</p>
+          <svg class="chart" id="chart" viewBox="0 0 600 252" role="img" aria-labelledby="chart-t chart-d">
+            <title id="chart-t">Recall with 95% intervals, Holdout 2</title>
+            <desc id="chart-d">Single pass 82% recall, interval 70 to 90%. Pipeline 76% recall, interval 64 to 86%, computed from the counts.</desc>
+            <g class="axis" id="axis">
+              <line class="grid base" x1="100" x2="100" y1="24" y2="140"/><text class="tick-l" x="100" y="14" text-anchor="middle">40%</text>
+              <line class="grid" x1="180.7" x2="180.7" y1="24" y2="140"/><text class="tick-l" x="180.7" y="14" text-anchor="middle">50</text>
+              <line class="grid" x1="261.3" x2="261.3" y1="24" y2="140"/><text class="tick-l" x="261.3" y="14" text-anchor="middle">60</text>
+              <line class="grid" x1="342" x2="342" y1="24" y2="140"/><text class="tick-l" x="342" y="14" text-anchor="middle">70</text>
+              <line class="grid" x1="422.7" x2="422.7" y1="24" y2="140"/><text class="tick-l" x="422.7" y="14" text-anchor="middle">80</text>
+              <line class="grid" x1="503.3" x2="503.3" y1="24" y2="140"/><text class="tick-l" x="503.3" y="14" text-anchor="middle">90</text>
+              <line class="grid" x1="584" x2="584" y1="24" y2="140"/><text class="tick-l" x="584" y="14" text-anchor="middle">100%</text>
+            </g>
+            <text class="sec-l" x="0" y="174">cost of the run</text>
+            <g data-arm="single">
+              <text class="arm-l" x="0" y="68">single pass</text>
+              <line class="wh" x1="342" x2="503.3" y1="64" y2="64"/>
+              <line class="cap lo" x1="342" x2="342" y1="59" y2="69"/>
+              <line class="cap hi" x1="503.3" x2="503.3" y1="59" y2="69"/>
+              <circle class="pt" cx="439.9" cy="64" r="5"/>
+              <text class="pv" x="439.9" y="51" text-anchor="middle">82%</text>
+              <text class="arm-l" x="0" y="204">single pass</text>
+              <rect class="cbar" x="100" y="196" width="83.1" height="8" rx="1"/>
+              <text class="cv" x="191.1" y="204">$25.13</text>
+            </g>
+            <g data-arm="pipeline">
+              <text class="arm-l" x="0" y="122">pipeline</text>
+              <line class="wh computed" x1="290.8" x2="468.1" y1="118" y2="118"/>
+              <line class="cap lo" x1="290.8" x2="290.8" y1="113" y2="123"/>
+              <line class="cap hi" x1="468.1" x2="468.1" y1="113" y2="123"/>
+              <circle class="pt" cx="393.3" cy="118" r="5"/>
+              <text class="pv" x="393.3" y="105" text-anchor="middle">76%</text>
+              <text class="arm-l" x="0" y="236">pipeline</text>
+              <rect class="cbar" x="100" y="228" width="406" height="8" rx="1"/>
+              <text class="cv" x="514" y="236">$124.04<tspan class="x"> · 4.9×</tspan></text>
+            </g>
+          </svg>
+          <table class="ro">
+            <thead><tr><th scope="col">arm</th><th scope="col">bugs found</th><th scope="col">recall</th><th scope="col">95% interval</th><th scope="col">cost</th></tr></thead>
+            <tbody id="ro-body">
+              <tr><th scope="row"><span class="sw" aria-hidden="true"></span>single pass</th><td>46 of 56</td><td>82%</td><td>70–90</td><td>$25.13</td></tr>
+              <tr><th scope="row"><span class="sw" aria-hidden="true"></span>pipeline</th><td>42 of 55</td><td>76%</td><td>64–86<span class="cmp">computed from the counts</span></td><td>$124.04</td></tr>
+            </tbody>
+          </table>
+          <p class="ev-note" id="ev-note">Opus 5.5 · 12 Nov 2026 · partial: both arms finished 53 of 82 holdout PRs.</p>
+          <div class="ev-foot">
+            <p class="ev-key" aria-hidden="true"><span><i class="k-dot"></i>recall</span><span><i class="k-wh"></i>95% interval</span><span><i class="k-dash"></i>interval computed from the counts</span></p>
+            <span class="ev-links"><a class="textbtn" href="#case-study">How it was measured</a><button type="button" class="textbtn needs-js" id="again">Replay the review</button></span>
+          </div>
+        </div>
+        </div>
+
+        <div class="controls needs-js" id="controls">
+          <ui-tooltip delay="400">
+            <ui-tooltip-trigger>
+              <button type="button" class="ctl play" id="play" aria-label="Play the replay">
+                <svg class="i-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z"/></svg>
+                <svg class="i-pause" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1.5h2.6v9H2.5zM6.9 1.5h2.6v9H6.9z"/></svg>
+              </button>
+            </ui-tooltip-trigger>
+            <ui-tooltip-content side="top" side-offset="8">Play or pause · ← → to step</ui-tooltip-content>
+          </ui-tooltip>
+          <div class="ruler" id="ruler" role="slider" tabindex="0" aria-label="Replay step" aria-valuemin="0" aria-valuemax="20" aria-valuenow="20"></div>
+          <span class="count" id="count" aria-hidden="true"><b>20</b>/20</span>
+          <button type="button" class="ctl" id="speed" aria-label="Playback speed 1×">1×</button>
+          <button type="button" class="ctl" id="skip">Skip to result</button>
+        </div>
+      </div>
+      <figcaption id="replay-cap">The code is an invented example showing how one review runs; the numbers at the end are from the real eval.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" id="case-study" aria-labelledby="cs-h">
+    <div class="side-label"><p class="label">Case study</p><p class="label">Nov 2026</p></div>
+    <div class="body"><article class="cs">
+      <h2 id="cs-h" tabindex="-1">Does a multi-agent code reviewer pay for itself?</h2>
+      <p class="dek">I built a code-review agent from sandboxed reviewers and adversarial validators, then built an eval to see whether all those agents earn their cost. On the latest, partial run, a single pass matched them at about a fifth of the price.</p>
+
+      <div class="cs-part">
+        <h3 id="cs-question">The question</h3>
+        <p class="prose">Multi-agent review is an easy design to like. Several reviewers, each with a narrow brief, then a second set of agents whose only job is to knock down what the first set found. It reads like rigour. It also costs several times as much per pull request. I wanted to know whether the extra agents find bugs that a single pass misses, or mostly add cost.</p>
+      </div>
+
+      <div class="cs-part">
+        <h3 id="cs-built">What I built</h3>
+        <aside class="side" id="sn-1" aria-label="Note 1"><span class="label">1 · The sandbox</span>A test runs against the sandbox itself and checks that network calls, writes outside the pack and reads of credential folders are all blocked.</aside>
+        <p class="prose">The agent pins a pull request's head and base into a pack, without touching any checkout, and sizes the review by diff size and risk. A standard run starts three <span class="n n-rev">reviewer</span> agents, each reading the diff through one lens: behaviour, boundaries, and a line-by-line proofread. A deep run adds a regression lens. The reviewers run headless inside an OS sandbox with no network and no access to credentials, and they can write only to the pack.<a class="snref" href="#sn-1" aria-label="Note 1">1</a> Each finding has to name a trigger, the wrong result and the path to it, file and line. Reviewers also list each ticket requirement and whether the diff delivers it.</p>
+        <p class="prose">A separate <span class="n n-val">validator</span> then tries to disprove every finding. It looks for the guard or caller that makes the code safe, checks that the trigger is reachable, and runs the smallest test where the repository's tests can run. Each candidate ends as confirmed, plausible, rejected or unvalidated; in the replay above, confirmed findings are <span class="n n-kept">kept</span> and rejected ones <span class="n n-dis">disproved</span>. A dollar cap stops new validators when a run gets expensive. Nothing is posted to GitHub: I read the result and decide what to say.</p>
+        <p class="prose">I designed, specified and reviewed this tooling; it was implemented with AI coding agents (Claude Code, Codex and Cursor).</p>
+      </div>
+
+      <div class="cs-part">
+        <h3 id="cs-measured">How I measured it</h3>
+        <aside class="side" id="sn-2" aria-label="Note 2"><span class="label">2 · Triage</span>An LLM first triaged 579 review threads, for bugs reviewers caught, and 665 fix PRs, for bugs that got past review.</aside>
+        <p class="prose">The test set had to come from real bugs in real code: the ones reviewers caught and the ones that got past them. I mined 2,107 merged pull requests from 8 repositories, January 2025 to February 2026, and added them to an earlier, smaller set.<a class="snref" href="#sn-2" aria-label="Note 2">2</a> A verifier agent then had to show each escaped bug absent at the base of the PR that introduced it and present at its head; 76 of 130 traced fixes failed that check and were dropped. After that, the set had 230 cases, 225 known bugs and 68 clean PRs.</p>
+        <p class="prose">The cases are split into a dev set for iteration and a holdout, with a rule against tuning on the holdout. A judge model decides whether a review found each known bug, so the score is recall. Every result carries a 95% interval, and a spend ledger with budget caps records every run. Each holdout run puts two arms on the same PRs: a single pass, and the full multi-agent pipeline.</p>
+      </div>
+
+      <div class="cs-part">
+        <h3 id="cs-found">What I found</h3>
+        <aside class="side" id="sn-3" aria-label="Note 3"><span class="label">3 · One computed range</span>The pipeline's range on the second run, 64 to 86%, is computed here from 42 of 55 with a Wilson score interval, because the run's summary does not print it. The same formula reproduces the other three ranges.</aside>
+        <p class="prose">Neither run shows a real difference in recall. On the smaller run the pipeline found two more bugs, 13 of 15 against 11 of 15. On the larger, partial run it went the other way, 42 of 55 against 46 of 56.<a class="snref" href="#sn-3" aria-label="Note 3">3</a> In both, the intervals overlap widely. The cost difference is real: the pipeline cost about 4.7 times as much on the first run and 4.9 times as much on the second.</p>
+        <figure class="runs" aria-labelledby="runs-cap">
+          <div class="runs-plot" aria-hidden="true">
+            <div class="rrow axis"><span></span><span class="tr"><i style="--p:40">40%</i><i style="--p:50">50</i><i style="--p:60">60</i><i style="--p:70">70</i><i style="--p:80">80</i><i style="--p:90">90</i><i style="--p:100">100%</i></span><span></span></div>
+            <p class="rg">Holdout 1 · Sonnet · 20 PRs</p>
+            <div class="rrow s"><span class="rl">single pass</span><span class="tr"><i class="ci" style="--lo:48;--hi:89"></i><i class="pt" style="--p:73.3"></i></span><span class="rv">73%</span></div>
+            <div class="rrow p"><span class="rl">pipeline</span><span class="tr"><i class="ci" style="--lo:62;--hi:96"></i><i class="pt" style="--p:86.7"></i></span><span class="rv">87%</span></div>
+            <p class="rg">Holdout 2 · partial · Opus 5.5 · 53 of 82 PRs</p>
+            <div class="rrow s"><span class="rl">single pass</span><span class="tr"><i class="ci" style="--lo:70;--hi:90"></i><i class="pt" style="--p:82.1"></i></span><span class="rv">82%</span></div>
+            <div class="rrow p"><span class="rl">pipeline</span><span class="tr"><i class="ci computed" style="--lo:64;--hi:86"></i><i class="pt" style="--p:76.4"></i></span><span class="rv">76%</span></div>
+          </div>
+          <table class="ro">
+            <thead><tr><th scope="col">arm</th><th scope="col">bugs found</th><th scope="col">recall</th><th scope="col">95% interval</th><th scope="col">cost</th></tr></thead>
+            <tbody>
+              <tr class="grp"><th scope="rowgroup" colspan="5">Holdout 1 · Sonnet · 7 Nov 2026 · 20 PRs</th></tr>
+              <tr><th scope="row">single pass</th><td>11 of 15</td><td>73%</td><td>48–89</td><td>$3.13</td></tr>
+              <tr><th scope="row">pipeline</th><td>13 of 15</td><td>87%</td><td>62–96</td><td>$14.58</td></tr>
+            </tbody>
+            <tbody>
+              <tr class="grp"><th scope="rowgroup" colspan="5">Holdout 2 · partial · Opus 5.5 · 12 Nov 2026 · 53 of 82 PRs</th></tr>
+              <tr><th scope="row">single pass</th><td>46 of 56</td><td>82%</td><td>70–90</td><td>$25.13</td></tr>
+              <tr><th scope="row">pipeline</th><td>42 of 55</td><td>76%</td><td>64–86<span class="cmp">computed from the counts</span></td><td>$124.04</td></tr>
+            </tbody>
+          </table>
+          <figcaption id="runs-cap">Recall on agent-labelled bugs, with 95% intervals; the dashed range is computed from the counts. The same two runs switch in the <a href="#replay">replay at the top</a>.</figcaption>
+        </figure>
+        <p class="prose">So on this evidence a single pass matched the pipeline at about a fifth of the cost. Matched is the honest word: at these sample sizes the two designs cannot be told apart on recall, and only one of them costs about five times as much.</p>
+      </div>
+
+      <div class="cs-part">
+        <h3 id="cs-limits">Limits</h3>
+        <p class="prose">These numbers are worth what their limits allow.</p>
+        <ul class="list">
+          <li>The second run is partial: both arms finished 53 of 82 holdout PRs.</li>
+          <li>The bug labels were made by agents and not checked by a person; 20 are queued for a hand check.</li>
+          <li>One judge model scores every match, and it comes from the same model family as the reviewers.</li>
+          <li>The score is recall only. False alarms are not measured, and fewer false alarms is exactly what validators might buy.</li>
+          <li>It is my own tool, not a team rollout.</li>
+        </ul>
+      </div>
+
+      <div class="cs-part">
+        <h3 id="cs-next">What's next</h3>
+        <ol class="list">
+          <li>Finish the remaining 29 holdout PRs.</li>
+          <li>Hand-check the agent-made labels.</li>
+          <li>Measure false alarms on the 68 clean PRs.</li>
+          <li>Try a judge from a different model family.</li>
+        </ol>
+      </div>
+
+      <p class="takeaway">Measure before adding agents. <span>An expensive design has to earn its cost. So far the extra reviewers and validators have not earned theirs on recall; whether they earn it on false alarms is the next thing I measure.</span></p>
+    </article></div>
+  </section>
+
+  <section class="section" id="work" aria-labelledby="work-h">
+    <div class="side-label"><p class="label">Work</p><p class="label">2022 to now</p></div>
+    <div class="body">
+      <h2 class="h2" id="work-h" tabindex="-1">What I have built, and what each one shows</h2>
+      <table class="ledger" role="table">
+        <thead role="rowgroup"><tr role="row"><th scope="col" class="label yr" role="columnheader">Year</th><th scope="col" class="label" role="columnheader">Thing</th><th scope="col" class="label" role="columnheader">What it proves</th></tr></thead>
+        <tbody role="rowgroup">
+          <tr role="row">
+            <td class="yr" role="cell">2026</td>
+            <th scope="row" class="thing" role="rowheader"><b>Code-review agent and its eval harness</b><span>Sandboxed reviewers, validators that try to disprove each finding, and an eval set of 230 cases built from real merged PRs. <a href="#case-study">Case study</a></span></th>
+            <td class="proves" role="cell">I measure an agent before I trust it: on a partial holdout, a single pass matched the multi-agent pipeline at about a fifth of the cost.</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">2026</td>
+            <th scope="row" class="thing" role="rowheader"><b>Case-investigation MCP server</b><span>18 tools that join Postgres records, OpenSearch logs, S3 object metadata and Redis recovery state into one evidence timeline; 342 tests.</span></th>
+            <td class="proves" role="cell">An agent can reach production data safely: staging by default, read-only production access that fails closed, PII redaction, bounded queries that declare what they cut.</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">2026</td>
+            <th scope="row" class="thing" role="rowheader"><b>Full-stack, beyond the UI</b><span>FastAPI, Flask, Celery, Lambda, Terraform, Helm; second-largest committer on the new FastAPI backend (103 of 487 commits).</span></th>
+            <td class="proves" role="cell">I work across the API, the pipeline and the infrastructure that runs them.</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">2025</td>
+            <th scope="row" class="thing" role="rowheader"><b>React 16 to 19 upgrade</b><span>The product UI, with react-redux 5 to 9, as sole author.</span></th>
+            <td class="proves" role="cell">I can take a production UI across three major versions on my own.</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">since 2022</td>
+            <th scope="row" class="thing" role="rowheader"><b>React product UI</b><span>1,539 of 3,572 main-branch commits since Aug 2022 (43%), the largest share.</span></th>
+            <td class="proves" role="cell">I stay with a product: four years as the largest contributor to its React UI.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="experience" aria-labelledby="exp-h">
+    <div class="side-label"><p class="label">Experience</p><p class="label">2020 to now</p></div>
+    <div class="body">
+      <h2 class="h2" id="exp-h" tabindex="-1">Experience and education</h2>
+      <table class="ledger exp" role="table">
+        <thead role="rowgroup"><tr role="row"><th scope="col" class="label yr" role="columnheader">When</th><th scope="col" class="label" role="columnheader">Role</th><th scope="col" class="label" role="columnheader">Where</th></tr></thead>
+        <tbody role="rowgroup">
+          <tr role="row">
+            <td class="yr" role="cell">2025 to now</td>
+            <th scope="row" class="thing" role="rowheader"><b>Senior Software Engineer</b></th>
+            <td class="proves where" role="cell">Foundation AI, Hyderabad</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">Jul 2022 to 2025</td>
+            <th scope="row" class="thing" role="rowheader"><b>Software Engineer</b></th>
+            <td class="proves where" role="cell">Foundation AI, Hyderabad</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">Sep 2020 to Jul 2022</td>
+            <th scope="row" class="thing" role="rowheader"><b>Assistant Systems Engineer</b></th>
+            <td class="proves where" role="cell">Tata Consultancy Services</td>
+          </tr>
+          <tr role="row">
+            <td class="yr" role="cell">2016 to 2020</td>
+            <th scope="row" class="thing" role="rowheader"><b>B.E. Computer Science and Engineering</b><span>Education · 1st rank in CSE</span></th>
+            <td class="proves where" role="cell">Noorul Islam Centre for Higher Education (NICHE)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="tools"><span class="label">Tools</span>Python, JavaScript, SQL · React, Redux · FastAPI, Flask, Celery, PostgreSQL, OpenSearch, Airflow · AWS Lambda, SQS, EventBridge, S3, Terraform, Helm, Docker, Kubernetes · Claude Code, Codex, Cursor</p>
+    </div>
+  </section>
+
+  <section class="section" id="beliefs" aria-labelledby="beliefs-h">
+    <div class="side-label"><p class="label">Beliefs</p><p class="label">from what I built</p></div>
+    <div class="body">
+      <h2 class="h2" id="beliefs-h" tabindex="-1">What I believe about agents</h2>
+      <ol class="beliefs">
+        <li><h3>Measure before adding agents.</h3><p>On the latest, partial run, about five times the spend bought no extra recall. More agents is a hypothesis with a price, so it gets tested like any other.</p></li>
+        <li><h3>Never tune on the holdout.</h3><p>The eval keeps a dev split for iteration and a held-out split with a rule against tuning on it, and every number carries a 95% interval. On 15 bugs, a two-bug lead sits inside the noise.</p></li>
+        <li><h3>Ship the caveats with the number.</h3><p>My multi-agent design cost about five times as much as a single pass and found no more bugs on the latest, partial run, and the case study says so. It also says what the run cannot show: the bug labels were made by agents, one judge model scored them, and false alarms were not measured.</p></li>
+        <li><h3>Guardrails belong outside the model.</h3><p>The review agent runs in an OS sandbox with no network and no credentials, and a test proves the sandbox holds. The MCP server reads production only when asked, read-only, and fails closed. An instruction is a request; a sandbox is a guarantee.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-h">
+    <div class="side-label"><p class="label" id="contact-h">Contact</p></div>
+    <div class="body">
+      <p class="contact-line" id="contact-line" tabindex="-1"><a class="email" href="mailto:muhammadnameer@gmail.com">muhammadnameer@gmail.com</a><button type="button" class="copy needs-js" id="copy" aria-label="Copy email address">copy</button><span class="dot" aria-hidden="true">·</span><a href="https://github.com/name-er">GitHub</a><span class="dot" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/muhammadnameer">LinkedIn</a><span class="dot" aria-hidden="true">·</span><a href="Muhammad_Nameer_Resume.pdf">Resume (PDF)</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <p>
+    <span>rev <b>r4.2d9f61a</b></span>
+    <span>eval run <b>Nov 2026</b></span>
+    <span>Hyderabad <b><time id="ist" datetime="">IST, UTC+5:30</time></b><span class="needs-js"> IST</span></span>
+    <span>set in Geist and Geist Mono</span>
+  </p>
+</footer>
+
+<p class="sr-only" role="status" id="status"></p>
+
+<ui-dialog id="palette">
+  <ui-dialog-backdrop hidden></ui-dialog-backdrop>
+  <ui-dialog-content class="palette" hidden>
+    <ui-dialog-title class="sr-only">Command palette</ui-dialog-title>
+    <ui-command id="cmd">
+      <div class="cmd-in">
+        <span class="prompt" aria-hidden="true">›</span>
+        <ui-command-input><input aria-label="Search commands" placeholder="Jump to a section or run an action" autocomplete="off" spellcheck="false" /></ui-command-input>
+        <kbd aria-hidden="true">esc</kbd>
+      </div>
+      <ui-command-empty>No matching command.</ui-command-empty>
+      <ui-command-list>
+        <ui-command-group>
+          <ui-command-group-label>Go to</ui-command-group-label>
+          <ui-command-item value="go:name" label="Replay top" keywords="home,start">Top: the replay<span class="hint">↑</span></ui-command-item>
+          <ui-command-item value="go:cs-h" label="Read the case study" keywords="eval,results">Read the case study</ui-command-item>
+          <ui-command-item value="go:work-h" label="Work">Work</ui-command-item>
+          <ui-command-item value="go:exp-h" label="Experience" keywords="education,cv,tools">Experience</ui-command-item>
+          <ui-command-item value="go:beliefs-h" label="Beliefs">Beliefs about agents</ui-command-item>
+          <ui-command-item value="go:contact-line" label="Contact">Contact</ui-command-item>
+        </ui-command-group>
+        <ui-command-separator></ui-command-separator>
+        <ui-command-group>
+          <ui-command-group-label>Replay</ui-command-group-label>
+          <ui-command-item value="replay" label="Replay again" keywords="play,restart">Replay the review again</ui-command-item>
+          <ui-command-item value="skip" label="Skip to result" keywords="eval,chart">Skip to the result</ui-command-item>
+          <ui-command-item value="run:h1" label="Switch run Holdout 1" keywords="eval,chart">Switch run: Holdout 1</ui-command-item>
+          <ui-command-item value="run:h2" label="Switch run Holdout 2" keywords="eval,chart,partial">Switch run: Holdout 2, partial</ui-command-item>
+        </ui-command-group>
+        <ui-command-separator></ui-command-separator>
+        <ui-command-group>
+          <ui-command-group-label>Contact</ui-command-group-label>
+          <ui-command-item value="copy-email" label="Copy email" keywords="mail,contact">Copy email<span class="hint">muhammadnameer@gmail.com</span></ui-command-item>
+          <ui-command-item value="open:github" label="Open GitHub" keywords="code">Open GitHub<span class="hint">↗</span></ui-command-item>
+          <ui-command-item value="open:linkedin" label="Open LinkedIn">Open LinkedIn<span class="hint">↗</span></ui-command-item>
+          <ui-command-item value="download:resume" label="Download resume" keywords="cv,pdf">Download resume<span class="hint">PDF</span></ui-command-item>
+        </ui-command-group>
+      </ui-command-list>
+    </ui-command>
+  </ui-dialog-content>
+</ui-dialog>
+
+<ui-toast-region aria-label="Notifications" side="bottom" align="center">
+  <template>
+    <ui-toast><span class="tk" aria-hidden="true">✓</span><ui-toast-title></ui-toast-title><ui-toast-description></ui-toast-description></ui-toast>
+  </template>
+</ui-toast-region>
+
+<script type="application/json" id="replay-data">
+{
+  "findings": {
+    "f1": { "lane": "boundaries", "line": 14, "sev": "P1", "check": "runs the smallest test", "verdict": "kept", "ev": "got 100 of 340 items" },
+    "f2": { "lane": "behaviour", "line": 10, "sev": "P2", "check": "looks for a guard upstream", "verdict": "disproved", "ev": "guard found at http.py:31" },
+    "f3": { "lane": "lines", "line": 23, "sev": "P2", "check": "checks it is reachable", "verdict": "disproved", "ev": "API caps a collection at 100 pages" },
+    "f4": { "lane": "behaviour", "line": 6, "sev": "P3", "check": "runs the smallest test", "verdict": "kept", "ev": "sleeps after try 4, 8 s wasted" }
+  },
+  "lanes": { "behaviour": [3, 8], "boundaries": [3, 5], "lines": [3, 7] },
+  "steps": [
+    { "t": "log", "who": "prepare", "msg": "pin head 4be91d0 and base 9f2c7a3 into a pack", "cost": 0 },
+    { "t": "log", "who": "size", "msg": "+22 −4, retry and paging logic: standard, 3 lenses", "cost": 0.02 },
+    { "t": "log", "who": "sandbox", "msg": "no network, no credentials, writes only to the pack", "cost": 0 },
+    { "t": "log", "who": "reviewers", "msg": "start: behaviour, boundaries, lines", "cost": 0.05 },
+    { "t": "find", "f": "f1", "cost": 0.44 },
+    { "t": "find", "f": "f2", "cost": 0.38 },
+    { "t": "find", "f": "f3", "cost": 0.36 },
+    { "t": "find", "f": "f4", "cost": 0.33 },
+    { "t": "log", "who": "reviewers", "msg": "done: 4 candidate findings", "cost": 0.03 },
+    { "t": "log", "who": "validators", "msg": "start: one per finding, each tries to disprove it", "cost": 0.02 },
+    { "t": "check", "f": "f1", "cost": 0.12 }, { "t": "verdict", "f": "f1", "cost": 0.07 },
+    { "t": "check", "f": "f2", "cost": 0.09 }, { "t": "verdict", "f": "f2", "cost": 0.04 },
+    { "t": "check", "f": "f3", "cost": 0.08 }, { "t": "verdict", "f": "f3", "cost": 0.03 },
+    { "t": "check", "f": "f4", "cost": 0.11 }, { "t": "verdict", "f": "f4", "cost": 0.06 },
+    { "t": "log", "who": "result", "msg": "2 kept, 2 disproved, $2.23", "cost": 0 },
+    { "t": "flip", "who": "eval", "msg": "one PR shows how; the holdout measures it", "cost": 0 }
+  ]
+}
+</script>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const EMAIL = "muhammadnameer@gmail.com";
+  const LINKS = { github: "https://github.com/name-er", linkedin: "https://www.linkedin.com/in/muhammadnameer", resume: "Muhammad_Nameer_Resume.pdf" };
+  const statusEl = $("#status");
+  const say = (msg) => { statusEl.textContent = ""; setTimeout(() => { statusEl.textContent = msg; }, 60); };
+
+  /* ---------- Wilson score interval, checked against the eval files ---------- */
+  function wilson(found, total, z = 1.96) {
+    const p = found / total, z2 = z * z, d = 1 + z2 / total;
+    const centre = (p + z2 / (2 * total)) / d;
+    const half = (z * Math.sqrt(p * (1 - p) / total + z2 / (4 * total * total))) / d;
+    return [Math.round(100 * (centre - half)), Math.round(100 * (centre + half))];
+  }
+  // The eval files print these ranges; the same formula has to reproduce them.
+  console.assert(String(wilson(46, 56)) === "70,90" && String(wilson(11, 15)) === "48,89" && String(wilson(13, 15)) === "62,96", "Wilson interval does not match the eval files");
+
+  /* ---------- replay state ---------- */
+  const DATA = JSON.parse($("#replay-data").textContent);
+  const S = DATA.steps, N = S.length, F = DATA.findings;
+  for (const f of Object.values(F)) f.at = {};
+  S.forEach((s, i) => { if (s.f) F[s.f].at[s.t] = i; });
+  const flipAt = S.findIndex((s) => s.t === "flip");
+  const valStart = S.findIndex((s) => s.who === "validators");
+  const valEnd = S.findIndex((s) => s.who === "result");
+  const DUR = { log: 1100, find: 1750, check: 1150, verdict: 1450, flip: 0 };
+
+  const panel = $("#replay");
+  const code = $("#code");
+  const notes = Object.fromEntries($$(".note", code).map((n) => [n.dataset.f, n]));
+  const rows = Object.fromEntries($$(".ln[data-n]", code).map((r) => [r.dataset.n, r]));
+  const lanes = Object.fromEntries($$(".lane").map((l) => [l.dataset.lane, l]));
+  const log = $("#log"), spend = $("#spend"), ruler = $("#ruler"), count = $("#count");
+  const playBtn = $("#play"), speedBtn = $("#speed");
+  const tabs = { diff: $("#tab-diff"), eval: $("#tab-eval") };
+  const panes = { diff: $("#pane-diff"), eval: $("#pane-eval") };
+
+  let k = N - 1, playing = false, timer = 0, speed = 1, started = false, autoPaused = false, inView = false;
+
+  function noteState(id, at) {
+    const a = F[id].at;
+    if (at < a.find) return "hidden";
+    if (at < a.check) return "open";
+    if (at < a.verdict) return "checking";
+    return "final";
+  }
+
+  function describe(s) {
+    if (!s) return { who: "", msg: "ready" };
+    const f = F[s.f];
+    if (s.t === "find") return { who: f.lane, cls: "rev", msg: `flagged L${f.line} · ${f.sev}` };
+    if (s.t === "check") return { who: "validator", cls: "val", msg: `L${f.line}: ${f.check}` };
+    if (s.t === "verdict") return { who: "validator", cls: "val", msg: `L${f.line} ${f.verdict}: ${f.ev}`, v: f.verdict };
+    return { who: s.who, cls: s.who === "reviewers" ? "rev" : s.who === "validators" ? "val" : "", msg: s.msg };
+  }
+
+  // ruler ticks, one per step
+  ruler.innerHTML = S.map((s, i) => {
+    const major = s.t === "find" || s.t === "verdict" || s.t === "flip";
+    const v = s.t === "verdict" ? ` v-${F[s.f].verdict}` : "";
+    return `<span class="tk${major ? " major" : ""}${v}" data-i="${i}"></span>`;
+  }).join("");
+  const ticks = $$(".tk", ruler);
+
+  function render(next) {
+    k = Math.max(-1, Math.min(N - 1, next));
+    const cur = S[k];
+    // notes and line marks
+    for (const r of Object.values(rows)) { r.removeAttribute("data-mark"); r.classList.remove("active"); }
+    for (const [id, n] of Object.entries(notes)) {
+      const st = noteState(id, k);
+      n.hidden = st === "hidden";
+      n.dataset.state = st;
+      if (st !== "hidden") rows[F[id].line].dataset.mark = st === "final" ? F[id].verdict : st;
+    }
+    if (cur && cur.f) rows[F[cur.f].line].classList.add("active");
+    // reviewer lanes
+    for (const [name, [a, b]] of Object.entries(DATA.lanes)) {
+      const el = lanes[name], st = k < a ? "idle" : k < b ? "running" : "done";
+      el.dataset.st = st;
+      const found = Object.values(F).filter((f) => f.lane === name && f.at.find <= k).length;
+      $(".ct", el).textContent = st === "idle" ? "" : String(found);
+      $(".st", el).textContent = { idle: "waiting", running: "reading", done: "done" }[st];
+      el.classList.toggle("active", !!cur && cur.t === "find" && F[cur.f].lane === name);
+    }
+    // validator lane
+    const v = lanes.validators, vst = k < valStart ? "idle" : k < valEnd ? "running" : "done";
+    v.dataset.st = vst;
+    const kept = Object.values(F).filter((f) => f.at.verdict <= k && f.verdict === "kept").length;
+    const dis = Object.values(F).filter((f) => f.at.verdict <= k && f.verdict === "disproved").length;
+    $(".ct", v).innerHTML = vst === "idle" ? "" : `<span class="k">${kept}✓</span> <span class="x">${dis}✕</span>`;
+    $(".st", v).textContent = { idle: "waiting", running: "checking", done: "done" }[vst];
+    v.classList.toggle("active", !!cur && (cur.t === "check" || cur.t === "verdict"));
+    // log: the last four steps
+    const from = Math.max(0, k - 3);
+    log.innerHTML = S.slice(from, k + 1).map((s, j) => {
+      const d = describe(s);
+      return `<li class="${d.v || ""}"><span class="i">${String(from + j + 1).padStart(2, "0")}</span><span class="w ${d.cls || ""}">${d.who}</span><span class="m">${d.msg}</span></li>`;
+    }).join("") || `<li><span class="i">00</span><span class="w">replay</span><span class="m">ready: one pull request, ${N} steps</span></li>`;
+    // spend, illustrative
+    const total = S.slice(0, k + 1).reduce((t, s) => t + (s.cost || 0), 0);
+    spend.textContent = `$${total.toFixed(2)}`;
+    $("#runsize").innerHTML = k >= 1 ? "code-review agent · <b>standard: 3 lenses</b>" : "code-review agent · sizing";
+    // ruler
+    ticks.forEach((t, i) => { t.classList.toggle("past", i < k); t.classList.toggle("cur", i === k); });
+    ruler.setAttribute("aria-valuenow", String(k + 1));
+    ruler.setAttribute("aria-valuetext", k < 0 ? "Not started" : `Step ${k + 1} of ${N}: ${describe(cur).who} ${describe(cur).msg}`);
+    count.innerHTML = `<b>${String(k + 1).padStart(2, "0")}</b>/${N}`;
+    layoutNotes();
+  }
+
+  /* notes sit in the right margin on wide panels; stack them so none overlap */
+  function marginMode() {
+    const n = Object.values(notes)[0];
+    return getComputedStyle(n).position === "absolute";
+  }
+  const lastRow = Object.values(rows).at(-1);
+  function layoutNotes() {
+    if (!marginMode()) { for (const n of Object.values(notes)) n.style.top = ""; return 0; }
+    const shown = Object.values(notes).filter((n) => !n.hidden).sort((a, b) => +a.dataset.line - +b.dataset.line);
+    const hs = shown.map((n) => n.offsetHeight), tops = [];
+    // forward: sit level with the line, below the note before
+    let floor = 0;
+    shown.forEach((n, i) => { tops[i] = Math.max(rows[n.dataset.line].offsetTop - 3, floor); floor = tops[i] + hs[i] + 8; });
+    // backward: a note that would run past the last line moves up to end level with its own line
+    let ceil = lastRow.offsetTop + lastRow.offsetHeight + 46;
+    for (let i = shown.length - 1; i >= 0; i--) {
+      if (tops[i] + hs[i] > ceil) tops[i] = Math.max(0, ceil - hs[i]);
+      ceil = tops[i] - 8;
+    }
+    let bottom = 0;
+    shown.forEach((n, i) => { n.style.top = `${tops[i]}px`; bottom = Math.max(bottom, tops[i] + hs[i]); });
+    return bottom;
+  }
+  // reserve room for the tallest moment, so the panel never changes height mid-replay
+  function reserve() {
+    code.style.minHeight = "";
+    const keep = k;
+    let need = 0;
+    if (marginMode()) for (let i = 0; i < N; i++) { render(i); need = Math.max(need, layoutNotes()); }
+    code.style.minHeight = need ? `${Math.ceil(need)}px` : "";
+    render(keep);
+  }
+
+  /* ---------- tabs ---------- */
+  let tab = "";
+  function setTab(name, { focus = false, animate = false } = {}) {
+    if (name === tab) return;
+    const swap = () => {
+      tab = name;
+      for (const [t, el] of Object.entries(tabs)) {
+        const on = t === name;
+        el.setAttribute("aria-selected", String(on));
+        el.tabIndex = on ? 0 : -1;
+        panes[t].classList.toggle("off", !on);
+        panes[t].inert = !on;
+      }
+      if (name === "eval") drawChart(run, false);
+      if (focus) tabs[name].focus();
+    };
+    if (animate && document.startViewTransition && !reduce.matches) document.startViewTransition(swap);
+    else swap();
+  }
+  for (const [name, el] of Object.entries(tabs)) el.addEventListener("click", () => setTab(name));
+  $(".tabs").addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    setTab(tab === "diff" ? "eval" : "diff", { focus: true });
+  });
+
+  /* ---------- playback ---------- */
+  function show(next, { animate = false } = {}) {
+    render(next);
+    setTab(k >= flipAt ? "eval" : "diff", { animate });
+  }
+  function setPlaying(on) {
+    playing = on;
+    panel.classList.toggle("playing", on);
+    playBtn.setAttribute("aria-label", on ? "Pause the replay" : "Play the replay");
+  }
+  function tick() {
+    show(k + 1, { animate: true });
+    if (k >= N - 1) {
+      setPlaying(false);
+      say("Replay finished: 2 findings kept, 2 disproved. The eval result is showing.");
+      return;
+    }
+    timer = setTimeout(tick, (DUR[S[k].t] ?? 1100) / speed);
+  }
+  function play() {
+    clearTimeout(timer);
+    if (k >= N - 1) show(-1);
+    started = true; autoPaused = false;
+    setPlaying(true);
+    timer = setTimeout(tick, k < 0 ? 450 / speed : (DUR[S[k].t] ?? 1100) / speed);
+  }
+  function pause() { clearTimeout(timer); setPlaying(false); }
+  function stepTo(i) { pause(); started = true; show(i); }
+
+  playBtn.addEventListener("click", () => (playing ? pause() : play()));
+  $("#skip").addEventListener("click", () => { stepTo(N - 1); tabs.eval.focus(); });
+  $("#again").addEventListener("click", () => { show(-1); play(); tabs.diff.focus(); });
+  const SPEEDS = [1, 2, 0.5];
+  speedBtn.addEventListener("click", () => {
+    speed = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length];
+    const label = `${speed === 0.5 ? "0.5" : speed}×`;
+    speedBtn.textContent = label;
+    speedBtn.setAttribute("aria-label", `Playback speed ${label}`);
+    if (playing) { clearTimeout(timer); timer = setTimeout(tick, 500 / speed); }
+  });
+
+  // tick ruler: pointer scrubbing and keyboard
+  function indexAt(x) {
+    const r = ruler.getBoundingClientRect(), pad = 4;
+    const t = (x - r.left - pad) / Math.max(1, r.width - pad * 2);
+    return Math.round(Math.max(0, Math.min(1, t)) * (N - 1));
+  }
+  ruler.addEventListener("pointerdown", (e) => {
+    ruler.setPointerCapture(e.pointerId);
+    stepTo(indexAt(e.clientX));
+  });
+  ruler.addEventListener("pointermove", (e) => {
+    if (ruler.hasPointerCapture(e.pointerId)) { const i = indexAt(e.clientX); if (i !== k) stepTo(i); }
+  });
+  ruler.addEventListener("keydown", (e) => {
+    const map = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1, PageUp: 5, PageDown: -5 };
+    if (e.key in map) { e.preventDefault(); stepTo(k + map[e.key]); }
+    else if (e.key === "Home") { e.preventDefault(); stepTo(-1); }
+    else if (e.key === "End") { e.preventDefault(); stepTo(N - 1); }
+  });
+  // arrow keys step the replay from anywhere on the page, unless something else wants them
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    if (e.altKey || e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+    const t = e.target;
+    if (t.closest && t.closest("input, textarea, select, [contenteditable], [role=slider], [role=tablist], .seg, ui-dialog-content")) return;
+    if ($("#palette").open) return;
+    const r = panel.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    e.preventDefault();
+    stepTo(k + (e.key === "ArrowRight" ? 1 : -1));
+  });
+
+  /* ---------- eval chart ---------- */
+  const RUNS = {
+    h1: {
+      title: "Holdout 1",
+      claim: "The pipeline found two more of 15 bugs, but the intervals overlap: <b>not a proven win.</b>",
+      note: "Sonnet · 7 Nov 2026 · 20 PRs with 15 known bugs.",
+      arms: [
+        { id: "single", label: "single pass", found: 11, total: 15, ci: [48, 89], cost: 3.13 },
+        { id: "pipeline", label: "pipeline", found: 13, total: 15, ci: [62, 96], cost: 14.58 },
+      ],
+    },
+    h2: {
+      title: "Holdout 2, partial",
+      claim: "A single pass <b>matched</b> the multi-agent pipeline at about a fifth of the cost.",
+      note: "Opus 5.5 · 12 Nov 2026 · partial: both arms finished 53 of 82 holdout PRs.",
+      arms: [
+        { id: "single", label: "single pass", found: 46, total: 56, ci: [70, 90], cost: 25.13 },
+        { id: "pipeline", label: "pipeline", found: 42, total: 55, ci: null, cost: 124.04 },
+      ],
+    },
+  };
+  let run = "h2";
+  const svg = $("#chart");
+  const armEls = Object.fromEntries($$("[data-arm]", svg).map((g) => [g.dataset.arm, g]));
+  const shown = {};
+  let tween = 0;
+
+  function geometry() {
+    const W = Math.max(300, Math.round(svg.getBoundingClientRect().width || 600));
+    const x0 = W < 440 ? 84 : 100, x1 = W - 18;
+    return { W, x0, x1, x: (p) => x0 + ((p - 40) / 60) * (x1 - x0) };
+  }
+  function drawAxis(g) {
+    const ticks = [40, 50, 60, 70, 80, 90, 100];
+    $("#axis").innerHTML = ticks.map((t, i) => {
+      const x = g.x(t).toFixed(1);
+      const label = t === 40 || t === 100 ? `${t}%` : String(t);
+      const showLabel = g.W >= 440 || i % 2 === 0;
+      return `<line class="grid${i === 0 ? " base" : ""}" x1="${x}" x2="${x}" y1="24" y2="140"/>` +
+        (showLabel ? `<text class="tick-l" x="${x}" y="14" text-anchor="middle">${label}</text>` : "");
+    }).join("");
+  }
+  function placeArm(id, v, g) {
+    const el = armEls[id], y = id === "single" ? 64 : 118, cy = id === "single" ? 196 : 228;
+    const lo = g.x(v.lo), hi = g.x(v.hi), p = g.x(v.p);
+    const bar = Math.max(3, v.c * (g.x1 - g.x0 - 76));
+    const set = (sel, attrs) => { const n = $(sel, el); for (const [a, val] of Object.entries(attrs)) n.setAttribute(a, typeof val === "number" ? val.toFixed(1) : val); };
+    set(".wh", { x1: lo, x2: hi, y1: y, y2: y });
+    set(".cap.lo", { x1: lo, x2: lo, y1: y - 5, y2: y + 5 });
+    set(".cap.hi", { x1: hi, x2: hi, y1: y - 5, y2: y + 5 });
+    set(".pt", { cx: p, cy: y });
+    set(".pv", { x: p, y: y - 13 });
+    set(".cbar", { x: g.x0, y: cy, width: bar });
+    set(".cv", { x: g.x0 + bar + 8, y: cy + 8 });
+  }
+  function drawChart(name, animate = true) {
+    run = name;
+    const R = RUNS[name], g = geometry();
+    svg.setAttribute("viewBox", `0 0 ${g.W} 252`);
+    drawAxis(g);
+    const target = {};
+    const max = Math.max(...R.arms.map((a) => a.cost)), min = Math.min(...R.arms.map((a) => a.cost));
+    for (const a of R.arms) {
+      const computed = !a.ci;
+      const [lo, hi] = a.ci || wilson(a.found, a.total);
+      a.range = [lo, hi]; a.computed = computed;
+      target[a.id] = { lo, hi, p: (100 * a.found) / a.total, c: a.cost / max };
+      $(".cv", armEls[a.id]).innerHTML = `$${a.cost.toFixed(2)}` + (a.cost === max ? `<tspan class="x"> · ${(max / min).toFixed(1)}×</tspan>` : "");
+      const el = armEls[a.id];
+      $$(".wh, .cap", el).forEach((n) => n.classList.remove("off"));
+      $(".wh", el).classList.toggle("computed", computed);
+      $(".pv", el).textContent = `${Math.round((100 * a.found) / a.total)}%`;
+    }
+    cancelAnimationFrame(tween);
+    const from = { ...shown };
+    const t0 = performance.now(), dur = animate && !reduce.matches && from.single ? 480 : 0;
+    const frame = (now) => {
+      const t = dur ? Math.min(1, (now - t0) / dur) : 1, e = 1 - Math.pow(1 - t, 3);
+      for (const id of Object.keys(target)) {
+        const a = from[id] || target[id], b = target[id];
+        const v = { lo: a.lo + (b.lo - a.lo) * e, hi: a.hi + (b.hi - a.hi) * e, p: a.p + (b.p - a.p) * e, c: a.c + (b.c - a.c) * e };
+        placeArm(id, v, g);
+        shown[id] = v;
+      }
+      if (t < 1) tween = requestAnimationFrame(frame);
+    };
+    frame(t0);
+    // text that follows the run
+    $("#ev-claim").innerHTML = R.claim;
+    $("#ev-note").textContent = R.note;
+    $("#chart-t").textContent = `Recall with 95% intervals, ${R.title}`;
+    $("#chart-d").textContent = R.arms.map((a) => `${a.label} ${Math.round((100 * a.found) / a.total)}% recall, interval ${a.range[0]} to ${a.range[1]}%${a.computed ? ", computed from the counts" : ""}`).join(". ") + ".";
+    $("#ro-body").innerHTML = R.arms.map((a) => `<tr><th scope="row"><span class="sw" aria-hidden="true"></span>${a.label}</th><td>${a.found} of ${a.total}</td><td>${Math.round((100 * a.found) / a.total)}%</td><td>${a.range[0]}–${a.range[1]}${a.computed ? '<span class="cmp">computed from the counts</span>' : ""}</td><td>$${a.cost.toFixed(2)}</td></tr>`).join("");
+    $$(".seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.run === name)));
+  }
+  $$(".seg button").forEach((b) => b.addEventListener("click", () => {
+    drawChart(b.dataset.run);
+    const R = RUNS[b.dataset.run];
+    say(`${R.title}: single pass ${R.arms[0].found} of ${R.arms[0].total}, pipeline ${R.arms[1].found} of ${R.arms[1].total}.`);
+  }));
+
+  /* ---------- start ---------- */
+  drawChart("h2", false);
+  if (reduce.matches) {
+    show(N - 1);
+  } else {
+    show(-1);
+    new IntersectionObserver(([e]) => {
+      inView = e.isIntersecting;
+      if (inView && !started) play();
+      else if (!inView && playing) { pause(); autoPaused = true; }
+      else if (inView && autoPaused) play();
+    }, { threshold: 0.35 }).observe(panel);
+  }
+  const relayout = () => { reserve(); if (tab === "eval") drawChart(run, false); };
+  document.fonts && document.fonts.ready.then(relayout);
+  let rz = 0;
+  addEventListener("resize", () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(relayout); });
+  relayout();
+
+  /* ---------- local time in Hyderabad ---------- */
+  const ist = $("#ist");
+  const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" });
+  const clock = () => { const d = new Date(); ist.textContent = fmt.format(d); ist.dateTime = d.toISOString(); };
+  clock(); setInterval(clock, 1000);
+
+  /* ---------- copy email, toast ---------- */
+  // ui-sdk's toast() has no browser entry without a build, so this reads the default toaster it shares on
+  // globalThis. If that ever disappears, the copy button says "copied" itself and the address stays visible.
+  function toaster() { const t = globalThis[Symbol.for("ui-sdk.toast@1")]; return typeof t === "function" ? t : null; }
+  const copyBtn = $("#copy");
+  function flash(text) { copyBtn.textContent = text; clearTimeout(flash.t); flash.t = setTimeout(() => { copyBtn.textContent = "copy"; }, 1800); }
+  async function copyEmail() {
+    const toast = toaster();
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      if (toast) toast.success("Email copied"); else { flash("copied"); say("Email copied"); }
+    } catch {
+      if (toast) toast(EMAIL, { description: "copy it from here" }); else say(EMAIL);
+    }
+  }
+  copyBtn.addEventListener("click", copyEmail);
+
+  /* ---------- command palette ---------- */
+  function goTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth", block: id === "name" ? "center" : "start" });
+  }
+  function runCommand(v) {
+    const [kind, arg] = v.split(":");
+    if (kind === "go") goTo(arg);
+    else if (kind === "replay") { goTo("name"); show(-1); play(); }
+    else if (kind === "skip") { goTo("name"); stepTo(N - 1); }
+    else if (kind === "run") { goTo("name"); pause(); started = true; render(N - 1); setTab("eval"); drawChart(arg); }
+    else if (kind === "copy-email") copyEmail();
+    else if (kind === "open") window.open(LINKS[arg], "_blank", "noopener");
+    else if (kind === "download") Object.assign(document.createElement("a"), { href: LINKS[arg], download: "Muhammad_Nameer_Resume.pdf" }).click();
+  }
+  customElements.whenDefined("ui-command").then(() => {
+    const dlg = $("#palette");
+    $("#cmd").addEventListener("action", (e) => {
+      const v = e.detail.value;
+      dlg.open = false;
+      requestAnimationFrame(() => requestAnimationFrame(() => runCommand(v)));
+    });
+    dlg.addEventListener("openchange", (e) => {
+      if (e.detail.value) { const c = $("#cmd"); c.query = ""; }
+    });
+  });
+})();
+</script>
+</body>
+</html>
